@@ -55,7 +55,7 @@ function RootNavigator() {
                         )
                     },
                     headerStyle: {
-                        backgroundColor: '#ded8c1',
+                        backgroundColor: '#b2c7eb',
                     },
                 })}
             >
@@ -83,8 +83,8 @@ function BottomTabNavigator() {
             screenOptions={() => ({
                 tabBarActiveTintColor: '#7b8f4b',
                 tabBarInactiveTintColor: 'grey',
-                tabBarActiveBackgroundColor: '#f0ead2',
-                tabBarInactiveBackgroundColor: '#f0ead2',
+                tabBarActiveBackgroundColor: '#b2c7eb',
+                tabBarInactiveBackgroundColor: '#b2c7eb',
                 tabBarLabelStyle: {
                     marginBottom: 3
                 },
