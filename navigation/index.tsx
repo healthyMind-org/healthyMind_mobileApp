@@ -87,7 +87,7 @@ function BottomTabNavigator() {
         <Tab.Navigator
             initialRouteName="OverviewScreen"
             screenOptions={() => ({
-                tabBarActiveTintColor: '#7b8f4b',
+                tabBarActiveTintColor: '#3a7075',
                 tabBarInactiveTintColor: 'grey',
                 tabBarActiveBackgroundColor: '#b2c7eb',
                 tabBarInactiveBackgroundColor: '#b2c7eb',
@@ -97,14 +97,23 @@ function BottomTabNavigator() {
                 tabBarButton: (props) => <TouchableOpacity {...props}/>
             })}
         >
-            <Tab.Screen
-                name="OverviewScreen"
-                component={OverviewScreen}
-                options={{
-                    title: 'Overview',
-                    tabBarIcon: ({color}) => <FontAwesomeIcon icon={faHouse} color={color}/>
+            <Tab.Group
+                screenOptions={{
+                    headerStyle: {
+                        backgroundColor: '#b2c7eb',
+                    },
                 }}
-            />
+            >
+                <Tab.Screen
+                    name="OverviewScreen"
+                    component={OverviewScreen}
+                    options={{
+                        title: 'Overview',
+                        tabBarIcon: ({color}) => <FontAwesomeIcon icon={faHouse} color={color}/>
+                    }}
+                />
+            </Tab.Group>
+
         </Tab.Navigator>
     );
 }

@@ -39,7 +39,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                         style={styles.button}
                         onPress={() => {
 
-                            navProps.navigation.navigate("SleepModal", {});
+
                         }}
                     >
                         <Text>Diet</Text>
@@ -47,7 +47,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => {
-                            navProps.navigation.navigate("SleepModal", {});
+
                         }}
                     >
                         <Text>Activities</Text>
@@ -67,7 +67,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => {
-                            navProps.navigation.navigate("SleepModal", {});
+
                         }}
                     >
                         <Text>Exposure</Text>
@@ -75,7 +75,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => {
-                            navProps.navigation.navigate("SleepModal", {});
+
                         }}
                     >
                         <Text>Interactions</Text>
