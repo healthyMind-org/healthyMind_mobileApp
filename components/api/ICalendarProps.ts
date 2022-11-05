@@ -5,4 +5,5 @@ export interface ICalendarProps {
     onChange: (date: Date) => void,
     style?: StyleProp<ViewStyle>,
     mode: string,
+    display: string,
 }

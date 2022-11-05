@@ -9,8 +9,9 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
 
     const [sleepTime, setSleepTime] = useState(new Date());
     const [time, setTime] = useState(new Date());
-    const [sleepRating, setSleepRating] = useState('')
-    const [wakeUpTime, setWakeUpTime] = useState(new Date())
+    const [sleepRating, setSleepRating] = useState('');
+    const [wakeUpTime, setWakeUpTime] = useState(new Date());
+    const [date, setDate] = useState(new Date());
 
     function saveSleepData() {
         console.log("save")
@@ -27,22 +28,27 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
 
             <Text style={styles.title}>Bed Time: </Text>
             <Calendar
+                display={'clock'}
                 mode={'time'}
                 onChange={(newTime: Date) => {
                     setSleepTime(newTime);
                 }}
                 style={[styles.button, styles.calendarButton]}
                 value={time}
+
             />
 
             <Text style={styles.title}> Wake up: </Text>
+
             <Calendar
+                display={'clock'}
                 mode={'time'}
                 onChange={(newTime: Date) => {
                     setWakeUpTime(newTime);
                 }}
                 style={[styles.button, styles.calendarButton]}
                 value={time}
+
             />
 
             <Text style={styles.title}> Quality: </Text>
