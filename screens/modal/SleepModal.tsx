@@ -3,6 +3,7 @@ import {useState} from "react";
 import {RootStackScreenProps} from "../../types";
 import {AirbnbRating} from 'react-native-ratings';
 import Calendar from "../../components/Calendar";
+import {DayLogger} from "../../application/DayLogger";
 
 
 export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">) {
@@ -14,8 +15,6 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
     const [date, setDate] = useState(new Date());
 
     function saveSleepData() {
-        console.log(sleepTime)
-        console.log(wakeUpTime)
         navProps.navigation.navigate('Root');
     }
 
