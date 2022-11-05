@@ -1,0 +1,49 @@
+import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
+import {useState} from "react";
+
+export default function Calendar(props: any) {
+    const [date, setDate] = useState(props.value);
+
+    const onChange = (event: any, selectedDate: any) => {
+        setDate(selectedDate);
+    };
+
+    const showMode = (currentMode: any) => {
+        DateTimePickerAndroid.open({
+            value: date,
+            onChange: onChange,
+            mode: currentMode,
+            is24Hour: true,
+        });
+    };
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+    return (
+        <>
+            <TouchableOpacity
+                style={props.style}
+                onPress={showDatepicker}
+            >
+                <Text>{date.toLocaleString()}</Text>
+            </TouchableOpacity>
+        </>
+    );
+}
+
+const styles = StyleSheet.create({
+    button: {
+        borderRadius: 10,
+        alignItems: "center",
+        alignContent: "center",
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        width: '100%',
+        paddingVertical: 20,
+        marginTop: 20,
+        backgroundColor: "#dddddd",
+    },
+});
