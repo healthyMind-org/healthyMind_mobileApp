@@ -13,15 +13,17 @@ export class MentalState {
     }
 
     public static getInstance(): MentalState {
-        if(!MentalState.instance){
+        if (!MentalState.instance) {
             MentalState.instance = new MentalState();
         }
+
         return MentalState.instance;
     }
 
-    addDay(day: Day){
-        let existingDayIndex = this.days.findIndex(x => x.date === day.date)
-        if(existingDayIndex >= 0){
+    addDay(day: Day) {
+        let existingDayIndex = this.days.findIndex(x => x.date === day.date);
+
+        if (existingDayIndex >= 0) {
             this.days[existingDayIndex] = day;
         } else {
             this.days.push(day);

@@ -14,13 +14,11 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
     let sleepModalProps = navProps.route.params;
     const [isLoading, setIsLoading] = useState(true);
     const [bedTime, setBedTime] = useState(new Date());
-    //const [time, setTime] = useState(new Date());
     const [sleepRating, setSleepRating] = useState(0);
     const [wakeUpTime, setWakeUpTime] = useState(new Date());
     let mentalState = MentalState.getInstance();
     let day;
     let dayLogger;
-    let sleepData;
 
     function setAllStates(sleepData: SleepData) {
         setBedTime(sleepData.bedTime as Date);
@@ -29,13 +27,8 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
     }
 
     useEffect(() =>{
-        console.log(mentalState);
         for (let i = 0; i < mentalState.days.length; i++){
-            console.log(mentalState.days[i].date);
-            console.log("current: ", sleepModalProps.date );
             if(mentalState.days[i].date.toISOString() === sleepModalProps.date.toISOString()){
-                console.log("found");
-                console.log(mentalState.days[i]);
                 setAllStates(mentalState.days[i].sleepData as SleepData);
             }
         }
@@ -152,5 +145,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textAlignVertical: 'center',
         paddingVertical: 20,
+        paddingRight: 20,
     },
 });

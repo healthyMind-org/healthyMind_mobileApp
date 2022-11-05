@@ -11,6 +11,7 @@ import {ISleepModalProps} from "./screens/modal/api/ISleepModalProps";
 import {INotFoundProps} from "./screens/api/INotFoundProps";
 import {IEmotionsModalProps} from "./screens/modal/api/IEmotionsModalProps";
 import {IStatusModalProps} from "./screens/modal/api/IStatusModalProps";
+import {IExposureModalProps} from "./screens/modal/api/IExposureModalProps";
 
 declare global {
     namespace ReactNavigation {
@@ -24,6 +25,7 @@ export type RootStackParamList = {
     SleepModal: ISleepModalProps;
     EmotionsModal: IEmotionsModalProps;
     StatusModal: IStatusModalProps;
+    ExposureModal: IExposureModalProps;
     NotFound: INotFoundProps;
 };
 
