@@ -13,12 +13,26 @@ export class DayLogger implements IDayLogger{
     }
 
     logSleep(bedTime: Date, wakeUpTime: Date, quality: number): void {
-        this.day.sleepData = new SleepData(bedTime, wakeUpTime, quality);
+        let updatedDay;
+        let existingDayIndex = this.mentalState.days.findIndex(x => x.date === this.day.date)
+        if(existingDayIndex >= 0){
+            updatedDay = this.mentalState.days[existingDayIndex];
+        } else {
+            updatedDay = this.day;
+        }
+        updatedDay.sleepData = new SleepData(bedTime, wakeUpTime, quality);
         this.mentalState.addDay(this.day);
     }
 
     logEmotions(angerLevel: number, distressLevel: number, overwhelmLevel: number, happinessLevel: number, fearLevel: number, disgustLevel: number, calmnessLevel: number, anxietyLevel: number, depressionLevel: number){
-        this.day.emotionData = new EmotionData(angerLevel, distressLevel, overwhelmLevel, happinessLevel, fearLevel, disgustLevel, calmnessLevel, anxietyLevel, depressionLevel);
+        let updatedDay;
+        let existingDayIndex = this.mentalState.days.findIndex(x => x.date === this.day.date)
+        if(existingDayIndex >= 0){
+            updatedDay = this.mentalState.days[existingDayIndex];
+        } else {
+            updatedDay = this.day;
+        }
+        updatedDay.emotionData = new EmotionData(angerLevel, distressLevel, overwhelmLevel, happinessLevel, fearLevel, disgustLevel, calmnessLevel, anxietyLevel, depressionLevel);
         this.mentalState.addDay(this.day);
     }
 

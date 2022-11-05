@@ -3,18 +3,13 @@ import {StyleSheet, Text, View} from "react-native";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {faFaceAngry, faFaceLaughBeam, faFaceSurprise, faFaceTired} from "@fortawesome/free-regular-svg-icons";
 import {faCloudShowersHeavy} from "@fortawesome/free-solid-svg-icons";
-import {useState} from "react";
 import {MentalState} from "../../domain/MentalState";
-import {SleepData} from "../../domain/SleepData";
 
 
 export default function StatusModal(navProps: RootStackScreenProps<"StatusModal">) {
-    const [date, setDate] = useState(new Date())
+    let statusModalProps = navProps.route.params;
 
-    let mentalData = MentalState.getInstance();
-    console.log(mentalData.depressionScore)
-
-    let sleepData;
+    let mentalState = MentalState.getInstance();
 
     return (
         <View style={styles.container}>

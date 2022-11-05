@@ -14,9 +14,13 @@ import {faPersonRunning} from "@fortawesome/free-solid-svg-icons";
 import {faComments} from "@fortawesome/free-solid-svg-icons";
 import {faPersonCircleCheck} from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
+import {ISleepModalProps} from "./modal/api/ISleepModalProps";
+import {IStatusModalProps} from "./modal/api/IStatusModalProps";
 
 export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScreen'>) {
     let emotionsModalProps: IEmotionsModalProps = {date: new Date()};
+    let sleepModalProps: IEmotionsModalProps = {date: new Date()};
+    let statusModalPros: IStatusModalProps = {date: new Date()};
     let props: IOverviewScreenProps = navProps.route.params;
     let iconSize = 35;
     const [date, setDate] = useState(new Date());
@@ -39,7 +43,9 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => {
-                            navProps.navigation.navigate("SleepModal", {});
+                            date.setHours(0,0,0,0);
+                            sleepModalProps.date = date;
+                            navProps.navigation.navigate("SleepModal", sleepModalProps);
                         }}
                     >
                         <FontAwesomeIcon style={styles.icon}  icon={faBed} size={iconSize}/>
@@ -100,7 +106,8 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                 <TouchableOpacity
                     style={[styles.button, styles.statusButton]}
                     onPress={() => {
-                        navProps.navigation.navigate("StatusModal", {});
+                        statusModalPros.date = date;
+                        navProps.navigation.navigate("StatusModal", statusModalPros);
                     }}
                 >
 

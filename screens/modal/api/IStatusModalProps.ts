@@ -1,3 +1,4 @@
-export interface IStatusModalProps {
 
+export interface IStatusModalProps {
+    date: Date;
 }
