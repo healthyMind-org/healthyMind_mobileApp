@@ -3,22 +3,33 @@ import {useState} from "react";
 import {RootStackScreenProps} from "../../types";
 import {AirbnbRating} from 'react-native-ratings';
 import Calendar from "../../components/Calendar";
+import {SleepData} from "../../domain/SleepData";
 import {DayLogger} from "../../application/DayLogger";
+import {Day} from "../../domain/Day";
 
 
 export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">) {
 
     const [sleepTime, setSleepTime] = useState(new Date());
     const [time, setTime] = useState(new Date());
-    const [sleepRating, setSleepRating] = useState('');
+    const [sleepRating, setSleepRating] = useState(0);
     const [wakeUpTime, setWakeUpTime] = useState(new Date());
-    const [date, setDate] = useState(new Date());
+    
+    let day;
+    let dayLogger;
+    let sleepData;
+
 
     function saveSleepData() {
+        sleepData = new SleepData(sleepTime, wakeUpTime, sleepRating);
+        day = new Day(time);
+        dayLogger = new DayLogger(day);
+        dayLogger.logSleep(sleepTime, wakeUpTime, sleepRating);
+
         navProps.navigation.navigate('Root');
     }
 
-    function ratingCompleted(rating: string) {
+    function ratingCompleted(rating: number) {
         console.log("Rating is: " + rating)
         setSleepRating(rating);
     }
