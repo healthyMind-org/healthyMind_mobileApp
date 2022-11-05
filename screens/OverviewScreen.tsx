@@ -1,33 +1,32 @@
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {RootTabScreenProps} from '../types';
 import Calendar from "../components/Calendar";
+import * as React from "react";
 import {useState} from "react";
 import {IOverviewScreenProps} from "./api/IOverviewScreenProps";
 import {IEmotionsModalProps} from "./modal/api/IEmotionsModalProps";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import {faBed, faChevronLeft} from "@fortawesome/free-solid-svg-icons";
-import {faCalendarDays} from "@fortawesome/free-solid-svg-icons";
-import {faFaceSmile} from "@fortawesome/free-solid-svg-icons";
-import {faUtensils} from "@fortawesome/free-solid-svg-icons";
-import {faMeteor} from "@fortawesome/free-solid-svg-icons";
-import {faPersonRunning} from "@fortawesome/free-solid-svg-icons";
-import {faComments} from "@fortawesome/free-solid-svg-icons";
-import {faPersonCircleCheck} from "@fortawesome/free-solid-svg-icons";
-import * as React from "react";
-import {ISleepModalProps} from "./modal/api/ISleepModalProps";
+import {
+    faBed,
+    faComments,
+    faFaceSmile,
+    faMeteor,
+    faPersonCircleCheck,
+    faPersonRunning,
+    faUtensils
+} from "@fortawesome/free-solid-svg-icons";
 import {IStatusModalProps} from "./modal/api/IStatusModalProps";
 
 export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScreen'>) {
     let emotionsModalProps: IEmotionsModalProps = {date: new Date()};
     let sleepModalProps: IEmotionsModalProps = {date: new Date()};
     let statusModalPros: IStatusModalProps = {date: new Date()};
-    let props: IOverviewScreenProps = navProps.route.params;
     let iconSize = 35;
+
     const [date, setDate] = useState(new Date());
 
     return (
         <View style={styles.container}>
-
             <Calendar
                 mode={'date'}
                 value={date}
@@ -53,19 +52,14 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={() => {
-
-
-                        }}
+                        onPress={() => {}}
                     >
                         <FontAwesomeIcon style={styles.icon}  icon={faUtensils} size={iconSize}/>
                         <Text>Diet</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={() => {
-
-                        }}
+                        onPress={() => {}}
                     >
                         <FontAwesomeIcon style={styles.icon}  icon={faPersonRunning} size={iconSize}/>
                         <Text>Activities</Text>
@@ -94,9 +88,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={() => {
-
-                        }}
+                        onPress={() => {}}
                     >
                         <FontAwesomeIcon style={styles.icon}  icon={faComments} size={iconSize}/>
                         <Text>Interactions</Text>
@@ -110,7 +102,6 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                         navProps.navigation.navigate("StatusModal", statusModalPros);
                     }}
                 >
-
                     <FontAwesomeIcon style={styles.icon} icon={faPersonCircleCheck} size={40}/>
                     <Text>Status</Text>
                 </TouchableOpacity>

@@ -2,6 +2,8 @@ import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
 import {useState} from "react";
 import {ICalendarProps} from "./api/ICalendarProps";
+import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
+import {faCalendarDays} from "@fortawesome/free-solid-svg-icons";
 
 export default function Calendar(props: ICalendarProps) {
     const [date, setDate] = useState(props.value);
@@ -27,13 +29,8 @@ export default function Calendar(props: ICalendarProps) {
     };
 
     const setText = () => {
-        let value;
-        if (currentMode === 'time'){
-             value = date.toTimeString();
-        }else {
-            value = date.toLocaleString();
-        }
-        return value
+        return currentMode === 'time' ?
+            date.toTimeString() : date.toDateString();
     }
 
     return (
@@ -42,7 +39,13 @@ export default function Calendar(props: ICalendarProps) {
                 style={props.style != null ? props.style : styles.button}
                 onPress={showDatepicker}
             >
-                <Text>{`${setText()}`}</Text>
+                <View style={styles.buttonContentContainer}>
+                    <View style={styles.buttonContentIcon}>
+                        <FontAwesomeIcon icon={faCalendarDays}/>
+                    </View>
+
+                    <Text style={styles.buttonContentText}>{`${setText()}`}</Text>
+                </View>
             </TouchableOpacity>
         </>
     );
@@ -58,6 +61,15 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingVertical: 20,
         marginTop: 20,
-        backgroundColor: "#dddddd",
+        backgroundColor: "#dddddd"
     },
+    buttonContentContainer: {
+        flexDirection: "row"
+    },
+    buttonContentIcon: {
+        padding: 5
+    },
+    buttonContentText: {
+        textAlignVertical: "center"
+    }
 });
