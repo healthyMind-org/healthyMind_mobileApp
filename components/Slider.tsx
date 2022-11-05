@@ -9,8 +9,7 @@ export default function Slider(props: ISliderProps) {
     return (
         <>
             <View style={styles.view}>
-                <Text style={styles.text}>{props.text}</Text>
-                <Text>: {props.value}%</Text>
+                <Text style={styles.text}>{props.text}: {props.value}%</Text>
 
                 {
                     props.descriptionTitle != null ? (
@@ -30,19 +29,17 @@ export default function Slider(props: ISliderProps) {
             </View>
 
             <View style={styles.slider}>
-            <ExternSlider
-                trackClickable={false}
-                value={props.value}
-                minimumValue={0}
-                maximumValue={100}
-                step={props.step != null ? props.step : 1}
-                onValueChange={(value) => {
-                    props.onValueChange(value as number);
-                }}
-            />
+                <ExternSlider
+                    trackClickable={false}
+                    value={props.value}
+                    minimumValue={0}
+                    maximumValue={100}
+                    step={props.step != null ? props.step : 1}
+                    onValueChange={(value) => {
+                        props.onValueChange(value as number);
+                    }}
+                />
             </View>
-
-
         </>
     )
 }
