@@ -14,7 +14,7 @@ export default function EmotionsModal() {
     const [calmnessScore, setCalmnessScore] = useState(0);
 
     return (
-        <View style={{padding: 20}}>
+        <View style={styles.outerContainer}>
             <Text style={styles.title}>How did you feel today?</Text>
 
             <ScrollView style={{height: "80%"}}>
@@ -112,6 +112,9 @@ export default function EmotionsModal() {
 }
 
 const styles = StyleSheet.create({
+    outerContainer: {
+        padding: 20,
+    },
     container: {
         flex: 1,
     },
