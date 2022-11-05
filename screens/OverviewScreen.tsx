@@ -1,17 +1,24 @@
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {RootTabScreenProps} from '../types';
 import Calendar from "../components/Calendar";
+import {useState} from "react";
+import {IOverviewScreenProps} from "./api/IOverviewScreenProps";
 
 export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScreen'>) {
 
-    let props = navProps.route.params;
+    let props: IOverviewScreenProps = navProps.route.params;
+
+    const [date, setDate] = useState(new Date());
 
     return (
         <View style={styles.container}>
 
             <Calendar
+                value={date}
+                onChange={(newDate: Date) => {
+                    setDate(newDate);
+                }}
                 style={[styles.button, styles.calendarButton]}
-                value={new Date()}
             />
 
             <View style={styles.innerContainer}>
