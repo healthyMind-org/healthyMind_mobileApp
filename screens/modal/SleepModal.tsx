@@ -1,32 +1,55 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {RootStackScreenProps} from "../../types";
 import {AirbnbRating} from 'react-native-ratings';
 import Calendar from "../../components/Calendar";
 import {SleepData} from "../../domain/SleepData";
 import {DayLogger} from "../../application/DayLogger";
 import {Day} from "../../domain/Day";
+import {MentalState} from "../../domain/MentalState";
 
 
 export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">) {
 
-    const [sleepTime, setSleepTime] = useState(new Date());
-    const [time, setTime] = useState(new Date());
+    let sleepModalProps = navProps.route.params;
+    const [isLoading, setIsLoading] = useState(true);
+    const [bedTime, setBedTime] = useState(new Date());
+    //const [time, setTime] = useState(new Date());
     const [sleepRating, setSleepRating] = useState(0);
     const [wakeUpTime, setWakeUpTime] = useState(new Date());
-    
+    let mentalState = MentalState.getInstance();
     let day;
     let dayLogger;
     let sleepData;
 
+    function setAllStates(sleepData: SleepData) {
+        setBedTime(sleepData.bedTime as Date);
+        setWakeUpTime(sleepData.wakeUpTime as Date);
+        setSleepRating(3);
+    }
+
+    useEffect(() =>{
+        console.log(mentalState);
+        for (let i = 0; i < mentalState.days.length; i++){
+            console.log(mentalState.days[i].date);
+            console.log("current: ", sleepModalProps.date );
+            if(mentalState.days[i].date.toISOString() === sleepModalProps.date.toISOString()){
+                console.log("found");
+                console.log(mentalState.days[i]);
+                setAllStates(mentalState.days[i].sleepData as SleepData);
+            }
+        }
+        setIsLoading(false);
+    }, []);
+
 
     function saveSleepData() {
-        sleepData = new SleepData(sleepTime, wakeUpTime, sleepRating);
-        day = new Day(time);
+        //sleepData = new SleepData(bedTime, wakeUpTime, sleepRating);
+        day = new Day(sleepModalProps.date);
         dayLogger = new DayLogger(day);
-        dayLogger.logSleep(sleepTime, wakeUpTime, sleepRating);
+        dayLogger.logSleep(bedTime, wakeUpTime, sleepRating);
 
-        navProps.navigation.navigate('Root');
+        navProps.navigation.goBack();
     }
 
     function ratingCompleted(rating: number) {
@@ -34,16 +57,16 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
         setSleepRating(rating);
     }
 
-    return (
+    return isLoading ? (""):(
         <View style={styles.container}>
             <Text style={styles.title}>Bed Time: </Text>
             <Calendar
                 mode={'time'}
                 onChange={(newTime: Date) => {
-                    setSleepTime(newTime);
+                    setBedTime(newTime);
                 }}
                 style={[styles.button, styles.calendarButton]}
-                value={time}
+                value={bedTime}
             />
 
             <Text style={styles.title}> Wake up: </Text>
@@ -54,7 +77,7 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
                     setWakeUpTime(newTime);
                 }}
                 style={[styles.button, styles.calendarButton]}
-                value={time}
+                value={wakeUpTime}
             />
 
             <Text style={styles.title}> Quality: </Text>
@@ -62,7 +85,7 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
                 count={5}
                 size={40}
                 onFinishRating={ratingCompleted}
-                defaultRating={0}
+                defaultRating={sleepRating}
             />
 
             <TouchableOpacity

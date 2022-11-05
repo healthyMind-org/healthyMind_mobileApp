@@ -15,6 +15,7 @@ import {RootStackParamList, RootTabParamList} from '../types';
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {faChevronLeft, faHouse} from "@fortawesome/free-solid-svg-icons";
 import EmotionsModal from "../screens/modal/EmotionsModal";
+import StatusModal from "../screens/modal/StatusModal";
 import ExposureModal from "../screens/modal/ExposureModal";
 
 export default function Navigation() {
@@ -70,6 +71,11 @@ function RootNavigator() {
                     name="EmotionsModal"
                     component={EmotionsModal}
                     options={{title: "Emotions"}}
+                />
+                <Stack.Screen
+                    name="StatusModal"
+                    component={StatusModal}
+                    options={{title: "Status"}}
                 />
                 <Stack.Screen
                     name="ExposureModal"

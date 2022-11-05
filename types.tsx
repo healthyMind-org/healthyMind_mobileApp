@@ -10,6 +10,7 @@ import {IOverviewScreenProps} from "./screens/api/IOverviewScreenProps";
 import {ISleepModalProps} from "./screens/modal/api/ISleepModalProps";
 import {INotFoundProps} from "./screens/api/INotFoundProps";
 import {IEmotionsModalProps} from "./screens/modal/api/IEmotionsModalProps";
+import {IStatusModalProps} from "./screens/modal/api/IStatusModalProps";
 import {IExposureModalProps} from "./screens/modal/api/IExposureModalProps";
 
 declare global {
@@ -23,6 +24,7 @@ export type RootStackParamList = {
     Root: NavigatorScreenParams<RootTabParamList> | undefined;
     SleepModal: ISleepModalProps;
     EmotionsModal: IEmotionsModalProps;
+    StatusModal: IStatusModalProps;
     ExposureModal: IExposureModalProps;
     NotFound: INotFoundProps;
 };
