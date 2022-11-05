@@ -3,6 +3,7 @@ import {MentalState} from "../domain/MentalState";
 import {Day} from "../domain/Day";
 import {SleepData} from "../domain/SleepData";
 import {EmotionData} from "../domain/EmotionData";
+import {ExposureData} from "../domain/ExposureData";
 
 export class DayLogger implements IDayLogger{
     mentalState = MentalState.getInstance();
@@ -22,4 +23,8 @@ export class DayLogger implements IDayLogger{
         this.mentalState.addDay(this.day);
     }
 
+    logExposure(pollutionLevel: number, disasterLevel: number) {
+        this.day.exposureData = new ExposureData(pollutionLevel, disasterLevel);
+        this.mentalState.addDay(this.day);
+    }
 }

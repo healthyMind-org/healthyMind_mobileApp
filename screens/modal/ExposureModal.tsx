@@ -1,18 +1,12 @@
 import {RootStackScreenProps} from "../../types";
 import {IExposureModalProps} from "./api/IExposureModalProps";
 import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Slider} from "@miblanchard/react-native-slider";
-import {trackMarkStyles} from "@miblanchard/react-native-slider/lib/stories/styles";
-
-enum POLLUTION_LVL_COLOR {
-    GOOD = "#7efc7e",
-    MODERATE = "#fafa7d",
-    UNHEALTHY_FOR_SENSITIVE_GROUP = "#faba7e",
-    UNHEALTHY = "#fc7d7d",
-    VERY_UNHEALTHY = "#f07efc",
-    HAZARDOUS = "#f6789d"
-}
+import {MentalState} from "../../domain/MentalState";
+import {ExposureData} from "../../domain/ExposureData";
+import {Day} from "../../domain/Day";
+import {DayLogger} from "../../application/DayLogger";
 
 enum POLLUTION_LVL {
     GOOD = "Good",
@@ -47,25 +41,6 @@ const getPollutionStateText = (value: number) => {
         return POLLUTION_LVL.HAZARDOUS;
     }
 }
-
-const getPollutionColor = (state: POLLUTION_LVL) => {
-    switch (state) {
-        case POLLUTION_LVL.GOOD:
-            return POLLUTION_LVL_COLOR.GOOD;
-        case POLLUTION_LVL.MODERATE:
-            return POLLUTION_LVL_COLOR.MODERATE;
-        case POLLUTION_LVL.UNHEALTHY_FOR_SENSITIVE_GROUP:
-            return POLLUTION_LVL_COLOR.UNHEALTHY_FOR_SENSITIVE_GROUP;
-        case POLLUTION_LVL.UNHEALTHY:
-            return POLLUTION_LVL_COLOR.UNHEALTHY;
-        case POLLUTION_LVL.VERY_UNHEALTHY:
-            return POLLUTION_LVL_COLOR.VERY_UNHEALTHY;
-        case POLLUTION_LVL.HAZARDOUS:
-        default:
-            return POLLUTION_LVL_COLOR.HAZARDOUS;
-    }
-}
-
 const getDisasterStateText = (value: number) => {
     if (value <= 0) {
         return DISASTER_LVL.NONE
@@ -86,7 +61,7 @@ const SliderContainer = (props: {
     children: React.ReactElement;
     onValueChange: (value: number) => void;
     text: string;
-    sliderValue?: Array<number>;
+    sliderValue?: number | Array<number>;
     trackMarks?: Array<number>;
     vertical?: boolean;
 }) => {
@@ -94,7 +69,6 @@ const SliderContainer = (props: {
     const [value, setValue] = useState(sliderValue ? sliderValue : 1);
 
     let renderTrackMarkComponent: React.ReactNode;
-
 
     if (trackMarks?.length && (!Array.isArray(value) || value?.length === 1)) {
         // @ts-ignore
@@ -110,8 +84,6 @@ const SliderContainer = (props: {
     }
 
     const renderChildren = () => {
-        // let pollutionState: POLLUTION_LVL = getPollutionStateText(value as number);
-        // let color = getPollutionColor(pollutionState);
 
         return React.Children.map(
             props.children,
@@ -120,14 +92,11 @@ const SliderContainer = (props: {
                     return React.cloneElement(child, {
                         onValueChange: (value: number) => {
                             setValue(value);
-                            props.onValueChange(value / 100);
+                            props.onValueChange(value);
                         },
-                        renderTrackMarkComponent,
-                        trackMarks,
-                        value,
-                        // maximumTrackTintColor: color,
-                        // minimumTrackTintColor: color,
-                        // thumbTintColor: color
+                        renderTrackMarkComponent: renderTrackMarkComponent,
+                        trackMarks: trackMarks,
+                        value: value
                     });
                 }
 
@@ -150,8 +119,28 @@ export default function ExposureModal(navProps: RootStackScreenProps<"ExposureMo
 
     const [pollutionScore, setPollutionScore] = useState(0);
     const [disasterScore, setDisasterScore] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
 
-    return (
+    useEffect(() => {
+        let mentalState = MentalState.getInstance();
+
+        for (let i = 0; i < mentalState.days.length; i++) {
+            if (mentalState.days[i].date.toISOString() === props.date.toISOString()) {
+                setAllScores(mentalState.days[i].exposureData as ExposureData);
+            }
+        }
+
+        setIsLoading(false);
+    }, []);
+
+    function setAllScores(exposureData: ExposureData) {
+        setPollutionScore(exposureData.pollutionLevel);
+        setDisasterScore(exposureData.disasterLevel);
+    }
+
+    return isLoading ? (
+        ""
+    ) : (
         <View style={styles.outerContainer}>
             <Text style={styles.title}>U good bro?</Text>
 
@@ -163,16 +152,16 @@ export default function ExposureModal(navProps: RootStackScreenProps<"ExposureMo
                     <SliderContainer
                         trackMarks={[10, 20, 30, 40, 60]}
                         onValueChange={value => setPollutionScore(value as number)}
-                        text={getPollutionStateText(pollutionScore * 100)}
+                        text={getPollutionStateText(pollutionScore)}
+                        sliderValue={pollutionScore}
                     >
                         <Slider
                             maximumValue={100}
                             minimumValue={0}
                             step={1}
-                            value={pollutionScore}
                         />
                     </SliderContainer>
-                    <Text>Value: {(pollutionScore * 100).toFixed(0)}%</Text>
+                    <Text>Value: {pollutionScore}%</Text>
 
                     <View style={styles.view}>
                         <Text style={styles.text}>Disaster</Text>
@@ -180,23 +169,26 @@ export default function ExposureModal(navProps: RootStackScreenProps<"ExposureMo
                     <SliderContainer
                         trackMarks={[0, 20, 40, 60, 80, 100]}
                         onValueChange={value => setDisasterScore(value as number)}
-                        text={getDisasterStateText(disasterScore * 100)}
+                        text={getDisasterStateText(disasterScore)}
+                        sliderValue={disasterScore}
                     >
                         <Slider
                             maximumValue={100}
                             minimumValue={0}
                             step={20}
-                            value={disasterScore}
                         />
                     </SliderContainer>
-                    <Text>Value: {(disasterScore * 100).toFixed(0)}%</Text>
+                    <Text>Value: {disasterScore}%</Text>
                 </View>
             </ScrollView>
 
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
-
+                    let day = new Day(props.date);
+                    let dayLogger = new DayLogger(day);
+                    dayLogger.logExposure(pollutionScore, disasterScore);
+                    navProps.navigation.goBack();
                 }}
             >
                 <Text>Save</Text>
