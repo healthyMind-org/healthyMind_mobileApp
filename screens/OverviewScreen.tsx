@@ -1,9 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {RootTabScreenProps} from '../types';
 import Calendar from "../components/Calendar";
-import * as React from "react";
 import {useState} from "react";
-import {IOverviewScreenProps} from "./api/IOverviewScreenProps";
 import {IEmotionsModalProps} from "./modal/api/IEmotionsModalProps";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {

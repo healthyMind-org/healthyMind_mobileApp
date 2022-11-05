@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     },
     title: {
         paddingTop: 20,
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
     },
     separator: {
