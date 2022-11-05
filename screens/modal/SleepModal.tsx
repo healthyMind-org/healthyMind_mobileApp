@@ -1,7 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useState} from "react";
 import {RootStackScreenProps} from "../../types";
-import {Rating} from 'react-native-ratings';
+import {AirbnbRating} from 'react-native-ratings';
 import Calendar from "../../components/Calendar";
 
 
@@ -14,7 +14,8 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
     const [date, setDate] = useState(new Date());
 
     function saveSleepData() {
-        console.log("save")
+        console.log(sleepTime)
+        console.log(wakeUpTime)
         navProps.navigation.navigate('Root');
     }
 
@@ -25,39 +26,33 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
 
     return (
         <View style={styles.container}>
-
             <Text style={styles.title}>Bed Time: </Text>
             <Calendar
-                display={'clock'}
                 mode={'time'}
                 onChange={(newTime: Date) => {
                     setSleepTime(newTime);
                 }}
                 style={[styles.button, styles.calendarButton]}
                 value={time}
-
             />
 
             <Text style={styles.title}> Wake up: </Text>
 
             <Calendar
-                display={'clock'}
                 mode={'time'}
                 onChange={(newTime: Date) => {
                     setWakeUpTime(newTime);
                 }}
                 style={[styles.button, styles.calendarButton]}
                 value={time}
-
             />
 
             <Text style={styles.title}> Quality: </Text>
-            <Rating
-                type='star'
-                ratingCount={5}
-                imageSize={40}
+            <AirbnbRating
+                count={5}
+                size={40}
                 onFinishRating={ratingCompleted}
-                style={styles.rating}
+                defaultRating={0}
             />
 
             <TouchableOpacity
