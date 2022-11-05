@@ -1,18 +1,18 @@
-import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useState} from "react";
 import {RootStackScreenProps} from "../../types";
-import { Rating} from 'react-native-ratings';
+import {Rating} from 'react-native-ratings';
 import Calendar from "../../components/Calendar";
-
 
 
 export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">) {
 
-    const [newSleepTime, setNewSleepTime] = useState("");
+    const [sleepTime, setSleepTime] = useState(new Date());
     const [time, setTime] = useState(new Date());
     const [sleepRating, setSleepRating] = useState('')
+    const [wakeUpTime, setWakeUpTime] = useState(new Date())
 
-    function saveSleepData(){
+    function saveSleepData() {
         console.log("save")
         navProps.navigation.navigate('Root');
     }
@@ -22,67 +22,44 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
         setSleepRating(rating);
     }
 
-    function onSleepTimeChange(){
-
-    }
-
-    function onWakeUpTimeChange(){
-
-    }
-
     return (
         <View style={styles.container}>
-            <View>
-                <Text style={styles.title}>Bed Time: </Text>
-                {/*see the example from github webpage and after use the compontent, marco is doing */}
-                {/*<DateTimePicker*/}
-                {/*    mode="time"*/}
-                {/*    value={time}*/}
-                {/*    style={{width: 300, opacity: 1, height: 30, marginTop: 50}}*/}
-                {/*    onChange={onTimeChange}*/}
-                {/*/>*/}
-                <Calendar
-                    mode={'time'}
-                    onChange={onSleepTimeChange}
-                    style={[styles.button, styles.calendarButton]}
-                    value={time}
-                />
 
-                <Text>selected: {Date.toLocaleString()}</Text>
-                {/*{show && (*/}
-                {/*    <DateTimePicker*/}
-                {/*        testID="dateTimePicker"*/}
-                {/*        value={date}*/}
-                {/*        mode={mode}*/}
-                {/*        is24Hour={true}*/}
-                {/*        onChange={onChange}*/}
-                {/*    />*/}
-                {/*)}*/}
-                <Calendar
-                    mode={'time'}
-                    onChange={onWakeUpTimeChange}
-                    style={[styles.button, styles.calendarButton]}
-                    value={time}
-                />
-            </View>
-            <View >
-                <Text style={styles.title}> Wake up: </Text>
-                <TextInput></TextInput>
-            </View>
-            <View>
-                <Text style={styles.title}> Quality: </Text>
-                <Rating
-                    type='star'
-                    ratingCount={5}
-                    imageSize={40}
-                    onFinishRating={ratingCompleted}
-                    style={{ paddingVertical: 10 }}
-                />
+            <Text style={styles.title}>Bed Time: </Text>
+            <Calendar
+                mode={'time'}
+                onChange={(newTime: Date) => {
+                    setSleepTime(newTime);
+                }}
+                style={[styles.button, styles.calendarButton]}
+                value={time}
+            />
 
-            </View>
-            <View>
-                <Button onPress={saveSleepData} title="Save"/>
-            </View>
+            <Text style={styles.title}> Wake up: </Text>
+            <Calendar
+                mode={'time'}
+                onChange={(newTime: Date) => {
+                    setWakeUpTime(newTime);
+                }}
+                style={[styles.button, styles.calendarButton]}
+                value={time}
+            />
+
+            <Text style={styles.title}> Quality: </Text>
+            <Rating
+                type='star'
+                ratingCount={5}
+                imageSize={40}
+                onFinishRating={ratingCompleted}
+                style={styles.rating}
+            />
+
+            <TouchableOpacity
+                style={styles.saveButton}
+                onPress={saveSleepData}
+            >
+                <Text>Save</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -90,10 +67,13 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        flexDirection: "column",
+        alignItems: "flex-start",
+        justifyContent: "flex-start",
+        padding: 10,
     },
     title: {
+        paddingTop: 20,
         fontSize: 20,
         fontWeight: 'bold',
     },
@@ -116,5 +96,27 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         marginTop: 20,
         backgroundColor: "#DDDDDD",
+    },
+    saveButton: {
+        borderRadius: 10,
+        alignItems: "center",
+        alignContent: "center",
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        width: '95%',
+        paddingVertical: 20,
+        marginTop: 20,
+        backgroundColor: "#DDDDDD",
+        position: "absolute",
+        bottom:25,
+        marginLeft:20,
+    },
+    rating: {
+        borderRadius: 10,
+        alignItems: "center",
+        alignContent: "center",
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        paddingVertical: 20,
     },
 });
