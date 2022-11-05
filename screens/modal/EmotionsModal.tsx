@@ -13,10 +13,10 @@ export default function EmotionsModal() {
     const [disgustScore, setDisgustScore] = useState(0);
     const [calmnessScore, setCalmnessScore] = useState(0);
 
-
     return (
         <View style={{padding: 20}}>
             <Text style={styles.title}>How did you feel today?</Text>
+
             <ScrollView style={{height: "80%"}}>
                 <View style={styles.container}>
 
@@ -114,16 +114,7 @@ export default function EmotionsModal() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //alignItems: 'center',
-        // justifyContent: 'center',
     },
-    // container: {
-    //     flex: 1,
-    //     marginLeft: 10,
-    //     marginRight: 10,
-    //     alignItems: 'stretch',
-    //     justifyContent: 'center',
-    // },
     button: {
         borderRadius: 10,
         alignItems: "center",
@@ -138,7 +129,6 @@ const styles = StyleSheet.create({
     view: {
         marginTop: 20,
         alignItems: "flex-start",
-
     },
     text: {
         fontSize: 15
@@ -146,6 +136,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: 'bold',
+        marginBottom: 10,
     },
     separator: {
         marginVertical: 30,
