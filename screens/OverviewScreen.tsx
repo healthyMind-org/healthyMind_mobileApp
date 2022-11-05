@@ -4,12 +4,21 @@ import Calendar from "../components/Calendar";
 import {useState} from "react";
 import {IOverviewScreenProps} from "./api/IOverviewScreenProps";
 import {IEmotionsModalProps} from "./modal/api/IEmotionsModalProps";
+import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
+import {faBed, faChevronLeft} from "@fortawesome/free-solid-svg-icons";
+import {faCalendarDays} from "@fortawesome/free-solid-svg-icons";
+import {faFaceSmile} from "@fortawesome/free-solid-svg-icons";
+import {faUtensils} from "@fortawesome/free-solid-svg-icons";
+import {faMeteor} from "@fortawesome/free-solid-svg-icons";
+import {faPersonRunning} from "@fortawesome/free-solid-svg-icons";
+import {faComments} from "@fortawesome/free-solid-svg-icons";
+import {faPersonCircleCheck} from "@fortawesome/free-solid-svg-icons";
+import * as React from "react";
 
 export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScreen'>) {
     let emotionsModalProps: IEmotionsModalProps = {date: new Date()};
     let props: IOverviewScreenProps = navProps.route.params;
-
-
+    let iconSize = 35;
     const [date, setDate] = useState(new Date());
 
     return (
@@ -33,6 +42,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                             navProps.navigation.navigate("SleepModal", {});
                         }}
                     >
+                        <FontAwesomeIcon style={styles.icon}  icon={faBed} size={iconSize}/>
                         <Text>Sleep</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -42,6 +52,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
 
                         }}
                     >
+                        <FontAwesomeIcon style={styles.icon}  icon={faUtensils} size={iconSize}/>
                         <Text>Diet</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -50,6 +61,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
 
                         }}
                     >
+                        <FontAwesomeIcon style={styles.icon}  icon={faPersonRunning} size={iconSize}/>
                         <Text>Activities</Text>
                     </TouchableOpacity>
                 </View>
@@ -62,6 +74,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                             navProps.navigation.navigate("EmotionsModal", emotionsModalProps);
                         }}
                     >
+                        <FontAwesomeIcon style={styles.icon}  icon={faFaceSmile} size={iconSize}/>
                         <Text>Emotions</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -70,6 +83,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
 
                         }}
                     >
+                        <FontAwesomeIcon style={styles.icon}  icon={faMeteor} size={iconSize}/>
                         <Text>Exposure</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -78,6 +92,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
 
                         }}
                     >
+                        <FontAwesomeIcon style={styles.icon}  icon={faComments} size={iconSize}/>
                         <Text>Interactions</Text>
                     </TouchableOpacity>
                 </View>
@@ -88,6 +103,8 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                         navProps.navigation.navigate("StatusModal", {});
                     }}
                 >
+
+                    <FontAwesomeIcon style={styles.icon} icon={faPersonCircleCheck} size={40}/>
                     <Text>Status</Text>
                 </TouchableOpacity>
             </View>
@@ -96,6 +113,9 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
 }
 
 const styles = StyleSheet.create({
+    icon: {
+      marginBottom: 10,
+    },
     container: {
         flex: 1,
         flexDirection: 'column',
@@ -122,7 +142,7 @@ const styles = StyleSheet.create({
         width: '80%',
     },
     button: {
-        borderRadius: 10,
+        borderRadius: 15,
         alignItems: "center",
         alignContent: "center",
         textAlign: 'center',
@@ -130,7 +150,7 @@ const styles = StyleSheet.create({
         width: '75%',
         paddingVertical: 20,
         marginTop: 20,
-        backgroundColor: "#DDDDDD",
+        backgroundColor: "rgba(178,199,235,0.37)",
     },
     statusButton: {
         width: '88%',
@@ -138,6 +158,10 @@ const styles = StyleSheet.create({
     },
     calendarButton: {
         width: '100%',
-        backgroundColor: '#dddddd',
+        marginTop: 2,
+        color: 'white',
+        borderRadius: 0,
+        paddingVertical: 10,
+        backgroundColor: '#ffffff',
     }
 });
