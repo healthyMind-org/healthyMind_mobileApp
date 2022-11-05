@@ -168,21 +168,9 @@ const styles = StyleSheet.create({
         marginTop: 20,
         backgroundColor: "rgba(178,199,235,0.37)",
     },
-    view: {
-        marginTop: 20,
-        alignItems: "flex-start",
-    },
-    text: {
-        fontSize: 15
-    },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 10,
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%',
     },
 });

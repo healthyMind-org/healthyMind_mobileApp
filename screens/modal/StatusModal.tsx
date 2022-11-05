@@ -28,21 +28,26 @@ export default function StatusModal(navProps: RootStackScreenProps<"StatusModal"
     const [exposureData, setExposureData] = useState(new ExposureData(0, 0))
 
     useEffect(() => {
-        console.log(mentalState);
         for (let i = 0; i < mentalState.days.length; i++) {
-            if (mentalState.days[i].date.toISOString() === statusModalProps.date.toISOString()) {
-                console.log(mentalState.days[i]);
-                setEmotionalData(mentalState.days[i].emotionData as EmotionData);
-                setSleepData(mentalState.days[i].sleepData as SleepData);
-                setExposureData(mentalState.days[i].exposureData as ExposureData)
+            let day = mentalState.days[i];
+
+            if (day.date.toISOString() === statusModalProps.date.toISOString()) {
+                if (day.emotionData != null) {
+                    setEmotionalData(day.emotionData as EmotionData);
+                }
+                if (day.sleepData != null) {
+                    setSleepData(day.sleepData as SleepData);
+                }
+                if (day.exposureData != null) {
+                    setExposureData(day.exposureData as ExposureData)
+                }
             }
         }
     }, []);
 
-    function shareResults(){
+    function shareResults() {
         console.log("Share it with your therapist, to do ")
     }
-
 
     return (
         <View style={styles.container}>
@@ -177,7 +182,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 12,
-        marginRight:8,
+        marginRight: 8,
         alignItems: 'center',
     },
     saveButton: {
@@ -191,7 +196,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         backgroundColor: "rgba(178,199,235,0.37)",
         position: "absolute",
-        bottom:25,
-        marginLeft:20,
+        bottom: 25,
+        marginLeft: 20,
     },
 });
