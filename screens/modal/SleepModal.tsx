@@ -23,7 +23,7 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
     function setAllStates(sleepData: SleepData) {
         setBedTime(sleepData.bedTime as Date);
         setWakeUpTime(sleepData.wakeUpTime as Date);
-        setSleepRating(3);
+        setSleepRating(sleepData.quality);
     }
 
     useEffect(() => {
@@ -39,7 +39,6 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
 
 
     function saveSleepData() {
-        //sleepData = new SleepData(bedTime, wakeUpTime, sleepRating);
         day = new Day(sleepModalProps.date);
         dayLogger = new DayLogger(day);
         dayLogger.logSleep(bedTime, wakeUpTime, sleepRating);
@@ -48,7 +47,6 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
     }
 
     function ratingCompleted(rating: number) {
-        console.log("Rating is: " + rating)
         setSleepRating(rating);
     }
 
