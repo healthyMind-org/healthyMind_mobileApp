@@ -9,6 +9,7 @@ import {MentalState} from "../../domain/MentalState";
 import {EmotionData} from "../../domain/EmotionData";
 import {RootStackScreenProps} from "../../types";
 import {faCircleInfo} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesome} from "@expo/vector-icons";
 
 export default function EmotionsModal(navProps: RootStackScreenProps<"EmotionsModal">) {
     let emotionsModalProps = navProps.route.params;
@@ -28,10 +29,12 @@ export default function EmotionsModal(navProps: RootStackScreenProps<"EmotionsMo
         let mentalState = MentalState.getInstance();
         for (let i = 0; i < mentalState.days.length; i++) {
             if (mentalState.days[i].date.toISOString() === emotionsModalProps.date.toISOString()) {
-                setAllScores(mentalState.days[i].emotionData as EmotionData);
+                if (mentalState.days[i].emotionData != null) {
+                    setAllScores(mentalState.days[i].emotionData as EmotionData);
+                }
             }
         }
-    },[]);
+    }, []);
 
     function setAllScores(emotionData: EmotionData) {
         setDepressionScore(emotionData.depressionLevel);
@@ -54,6 +57,7 @@ export default function EmotionsModal(navProps: RootStackScreenProps<"EmotionsMo
 
                     <View style={styles.view}>
                         <Text style={styles.text}>Depressed</Text>
+                        <FontAwesome icon={faCircleInfo}/>
                     </View>
                     <Slider
                         value={depressionScore}

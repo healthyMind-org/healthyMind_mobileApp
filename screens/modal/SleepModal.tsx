@@ -26,10 +26,12 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
         setSleepRating(3);
     }
 
-    useEffect(() =>{
-        for (let i = 0; i < mentalState.days.length; i++){
-            if(mentalState.days[i].date.toISOString() === sleepModalProps.date.toISOString()){
-                setAllStates(mentalState.days[i].sleepData as SleepData);
+    useEffect(() => {
+        for (let i = 0; i < mentalState.days.length; i++) {
+            if (mentalState.days[i].date.toISOString() === sleepModalProps.date.toISOString()) {
+                if (mentalState.days[i].sleepData != null) {
+                    setAllStates(mentalState.days[i].sleepData as SleepData);
+                }
             }
         }
         setIsLoading(false);
@@ -50,7 +52,7 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
         setSleepRating(rating);
     }
 
-    return isLoading ? (""):(
+    return isLoading ? ("") : (
         <View style={styles.container}>
             <Text style={styles.title}>Bed Time: </Text>
             <Calendar
@@ -135,8 +137,8 @@ const styles = StyleSheet.create({
         marginTop: 20,
         backgroundColor: "rgba(178,199,235,0.37)",
         position: "absolute",
-        bottom:25,
-        marginLeft:20,
+        bottom: 25,
+        marginLeft: 20,
     },
     rating: {
         borderRadius: 10,

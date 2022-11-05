@@ -128,7 +128,9 @@ export default function ExposureModal(navProps: RootStackScreenProps<"ExposureMo
 
         for (let i = 0; i < mentalState.days.length; i++) {
             if (mentalState.days[i].date.toISOString() === props.date.toISOString()) {
-                setAllScores(mentalState.days[i].exposureData as ExposureData);
+                if(mentalState.days[i].exposureData != null) {
+                    setAllScores(mentalState.days[i].exposureData as ExposureData);
+                }
             }
         }
 
@@ -144,7 +146,7 @@ export default function ExposureModal(navProps: RootStackScreenProps<"ExposureMo
         ""
     ) : (
         <View style={styles.outerContainer}>
-            <Text style={styles.title}>U good bro?</Text>
+            <Text style={styles.title}>What is the pollution level in your area?</Text>
 
             <ScrollView style={{height: "80%"}}>
                 <View style={styles.container}>
@@ -225,7 +227,7 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
     title: {
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 10,
     },
