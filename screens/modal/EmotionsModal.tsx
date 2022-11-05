@@ -1,4 +1,4 @@
-import {StyleSheet, View, Text, AppRegistry, ScrollView, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import {Slider} from "@miblanchard/react-native-slider";
 import {useEffect, useState} from "react";
 import {IEmotionsModalProps} from "./api/IEmotionsModalProps";
@@ -46,7 +46,7 @@ export default function EmotionsModal(navProps: RootStackScreenProps<"EmotionsMo
     }
 
     return (
-        <View style={{padding: 20}}>
+        <View style={styles.outerContainer}>
             <Text style={styles.title}>How did you feel today?</Text>
 
             <ScrollView style={{height: "80%"}}>
@@ -144,6 +144,9 @@ export default function EmotionsModal(navProps: RootStackScreenProps<"EmotionsMo
 }
 
 const styles = StyleSheet.create({
+    outerContainer: {
+        padding: 20,
+    },
     container: {
         flex: 1,
     },

@@ -86,7 +86,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => {
-
+                            navProps.navigation.navigate("ExposureModal", {date: date});
                         }}
                     >
                         <FontAwesomeIcon style={styles.icon}  icon={faMeteor} size={iconSize}/>
