@@ -8,6 +8,7 @@ import * as Console from "console";
 import {MentalState} from "../../domain/MentalState";
 import {EmotionData} from "../../domain/EmotionData";
 import {RootStackScreenProps} from "../../types";
+import {faCircleInfo} from "@fortawesome/free-solid-svg-icons";
 
 export default function EmotionsModal(navProps: RootStackScreenProps<"EmotionsModal">) {
     let emotionsModalProps = navProps.route.params;
@@ -27,7 +28,6 @@ export default function EmotionsModal(navProps: RootStackScreenProps<"EmotionsMo
         let mentalState = MentalState.getInstance();
         for (let i = 0; i < mentalState.days.length; i++) {
             if (mentalState.days[i].date.toISOString() === emotionsModalProps.date.toISOString()) {
-                console.log("found");
                 setAllScores(mentalState.days[i].emotionData as EmotionData);
             }
         }
@@ -60,22 +60,25 @@ export default function EmotionsModal(navProps: RootStackScreenProps<"EmotionsMo
                         onValueChange={value => setDepressionScore(value as number)}
                     />
                     <Text>Value: {(depressionScore * 100).toFixed(0)}%</Text>
+
                     <View style={styles.view}>
                         <Text style={styles.text}>Angry</Text>
-                    </View>
-                    <Slider
-                        value={anxietyScore}
-                        onValueChange={value => setAngerScore(value as number)}
-                    />
-                    <Text>Value: {(anxietyScore * 100).toFixed(0)}%</Text>
-                    <View style={styles.view}>
-                        <Text style={styles.text}>Anxious</Text>
                     </View>
                     <Slider
                         value={angerScore}
                         onValueChange={value => setAngerScore(value as number)}
                     />
                     <Text>Value: {(angerScore * 100).toFixed(0)}%</Text>
+
+                    <View style={styles.view}>
+                        <Text style={styles.text}>Anxious</Text>
+                    </View>
+                    <Slider
+                        value={anxietyScore}
+                        onValueChange={value => setAnxietyScore(value as number)}
+                    />
+                    <Text>Value: {(anxietyScore * 100).toFixed(0)}%</Text>
+
                     <View style={styles.view}>
                         <Text style={styles.text}>Distress</Text>
                     </View>

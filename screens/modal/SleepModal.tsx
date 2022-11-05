@@ -145,5 +145,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textAlignVertical: 'center',
         paddingVertical: 20,
+        paddingRight: 20,
     },
 });
