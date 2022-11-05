@@ -1,12 +1,14 @@
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
 import {useState} from "react";
+import {ICalendarProps} from "./api/ICalendarProps";
 
-export default function Calendar(props: any) {
+export default function Calendar(props: ICalendarProps) {
     const [date, setDate] = useState(props.value);
 
     const onChange = (event: any, selectedDate: any) => {
         setDate(selectedDate);
+        props.onChange(selectedDate);
     };
 
     const showMode = (currentMode: any) => {
@@ -25,7 +27,7 @@ export default function Calendar(props: any) {
     return (
         <>
             <TouchableOpacity
-                style={props.style}
+                style={props.style != null ? props.style : styles.button}
                 onPress={showDatepicker}
             >
                 <Text>{date.toLocaleString()}</Text>
