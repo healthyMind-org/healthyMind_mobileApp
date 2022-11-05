@@ -52,7 +52,9 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
         setSleepRating(rating);
     }
 
-    return isLoading ? ("") : (
+    return isLoading ? (
+        <></>
+    ) : (
         <View style={styles.container}>
             <Text style={styles.title}>Bed Time: </Text>
             <Calendar

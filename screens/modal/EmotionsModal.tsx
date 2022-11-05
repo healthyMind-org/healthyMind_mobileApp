@@ -132,7 +132,6 @@ export default function EmotionsModal(navProps: RootStackScreenProps<"EmotionsMo
                 <Text>Save</Text>
             </TouchableOpacity>
         </View>
-
     );
 }
 

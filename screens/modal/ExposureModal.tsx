@@ -143,7 +143,7 @@ export default function ExposureModal(navProps: RootStackScreenProps<"ExposureMo
     }
 
     return isLoading ? (
-        ""
+        <></>
     ) : (
         <View style={styles.outerContainer}>
             <Text style={styles.title}>What is the pollution level in your area?</Text>
