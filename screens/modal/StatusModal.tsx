@@ -4,12 +4,25 @@ import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {faFaceAngry, faFaceLaughBeam, faFaceSurprise, faFaceTired} from "@fortawesome/free-regular-svg-icons";
 import {faCloudShowersHeavy} from "@fortawesome/free-solid-svg-icons";
 import {MentalState} from "../../domain/MentalState";
+import {useEffect} from "react";
+import {SleepData} from "../../domain/SleepData";
 
 
 export default function StatusModal(navProps: RootStackScreenProps<"StatusModal">) {
     let statusModalProps = navProps.route.params;
-
     let mentalState = MentalState.getInstance();
+    let statusData;
+
+    useEffect(() =>{
+        console.log(mentalState);
+        for (let i = 0; i < mentalState.days.length; i++){
+            if(mentalState.days[i].date.toISOString() === statusModalProps.date.toISOString()){
+                //setAllStates(mentalState.days[i].sleepData as SleepData);
+                console.log(mentalState.days[i]);
+                statusData = mentalState.days[i];
+            }
+        }
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -41,6 +54,7 @@ export default function StatusModal(navProps: RootStackScreenProps<"StatusModal"
                     style={styles.icons}
                 />
             </View>
+            <Text>{statusData.emotionData.angerLevel}</Text>
             <View style={styles.innerContainer}>
                 <Text style={styles.title}> Exposure </Text>
             </View>
@@ -98,5 +112,9 @@ const styles = StyleSheet.create({
     },
     icons: {
         marginLeft: 20,
+        borderRadius: 100,
+        //backgroundColor: 'lightgreen',
+        borderStyle: "solid",
+        borderColor: 'lightgreen',
     }
 });
