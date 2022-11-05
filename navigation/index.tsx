@@ -14,6 +14,7 @@ import OverviewScreen from '../screens/OverviewScreen';
 import {RootStackParamList, RootTabParamList} from '../types';
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {faChevronLeft, faHouse} from "@fortawesome/free-solid-svg-icons";
+import EmotionsModal from "../screens/modal/EmotionsModal";
 
 export default function Navigation() {
     return (
@@ -63,6 +64,11 @@ function RootNavigator() {
                     name="SleepModal"
                     component={SleepModal}
                     options={{title: "Sleep"}}
+                />
+                <Stack.Screen
+                    name="EmotionsModal"
+                    component={EmotionsModal}
+                    options={{title: "Emotions"}}
                 />
             </Stack.Group>
         </Stack.Navigator>
