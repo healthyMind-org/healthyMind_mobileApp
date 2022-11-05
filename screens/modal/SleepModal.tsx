@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#dddddd',
     },
     button: {
-        borderRadius: 10,
+        borderRadius: 15,
         alignItems: "center",
         alignContent: "center",
         textAlign: 'center',
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         width: '75%',
         paddingVertical: 20,
         marginTop: 20,
-        backgroundColor: "#DDDDDD",
+        backgroundColor: "rgba(178,199,235,0.37)",
     },
     saveButton: {
         borderRadius: 10,
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
         width: '95%',
         paddingVertical: 20,
         marginTop: 20,
-        backgroundColor: "#DDDDDD",
+        backgroundColor: "rgba(178,199,235,0.37)",
         position: "absolute",
         bottom:25,
         marginLeft:20,

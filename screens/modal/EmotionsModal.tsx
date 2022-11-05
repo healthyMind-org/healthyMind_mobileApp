@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingVertical: 20,
         marginTop: 20,
-        backgroundColor: "#DDDDDD",
+        backgroundColor: "rgba(178,199,235,0.37)",
     },
     view: {
         marginTop: 20,
