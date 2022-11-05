@@ -1,8 +1,17 @@
 import {StyleSheet, View, Text, AppRegistry, ScrollView, TouchableOpacity} from 'react-native';
 import {Slider} from "@miblanchard/react-native-slider";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {IEmotionsModalProps} from "./api/IEmotionsModalProps";
+import {DayLogger} from "../../application/DayLogger";
+import {Day} from "../../domain/Day";
+import * as Console from "console";
+import {MentalState} from "../../domain/MentalState";
+import {EmotionData} from "../../domain/EmotionData";
+import {RootStackScreenProps} from "../../types";
 
-export default function EmotionsModal() {
+export default function EmotionsModal(navProps: RootStackScreenProps<"EmotionsModal">) {
+    let emotionsModalProps = navProps.route.params;
+
     const [depressionScore, setDepressionScore] = useState(0);
     const [anxietyScore, setAnxietyScore] = useState(0);
     const [angerScore, setAngerScore] = useState(0);
@@ -12,6 +21,29 @@ export default function EmotionsModal() {
     const [fearScore, setFearScore] = useState(0);
     const [disgustScore, setDisgustScore] = useState(0);
     const [calmnessScore, setCalmnessScore] = useState(0);
+
+
+    useEffect(() => {
+        let mentalState = MentalState.getInstance();
+        for (let i = 0; i < mentalState.days.length; i++) {
+            if (mentalState.days[i].date.toISOString() === emotionsModalProps.date.toISOString()) {
+                console.log("found");
+                setAllScores(mentalState.days[i].emotionData as EmotionData);
+            }
+        }
+    },[]);
+
+    function setAllScores(emotionData: EmotionData) {
+        setDepressionScore(emotionData.depressionLevel);
+        setAnxietyScore(emotionData.anxietyLevel);
+        setAngerScore(emotionData.angerLevel);
+        setDistressScore(emotionData.distressLevel);
+        setOverwhelmScore(emotionData.overwhelmLevel);
+        setHappinessScore(emotionData.happinessLevel);
+        setFearScore(emotionData.fearLevel);
+        setDisgustScore(emotionData.disgustLevel);
+        setCalmnessScore(emotionData.calmnessLevel);
+    }
 
     return (
         <View style={{padding: 20}}>
@@ -92,15 +124,16 @@ export default function EmotionsModal() {
                         onValueChange={value => setCalmnessScore(value as number)}
                     />
                     <Text>Value: {(calmnessScore * 100).toFixed(0)}%</Text>
-
-
                 </View>
 
             </ScrollView>
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
-
+                    let day = new Day(emotionsModalProps.date);
+                    let dayLogger = new DayLogger(day);
+                    dayLogger.logEmotions(angerScore, distressScore, overwhelmScore, happinessScore, fearScore, disgustScore, calmnessScore, anxietyScore, depressionScore);
+                    navProps.navigation.goBack();
                 }}
             >
                 <Text>Save</Text>

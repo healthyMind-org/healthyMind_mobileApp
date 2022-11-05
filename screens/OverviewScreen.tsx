@@ -3,11 +3,12 @@ import {RootTabScreenProps} from '../types';
 import Calendar from "../components/Calendar";
 import {useState} from "react";
 import {IOverviewScreenProps} from "./api/IOverviewScreenProps";
-import {Day} from "../domain/Day";
+import {IEmotionsModalProps} from "./modal/api/IEmotionsModalProps";
 
 export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScreen'>) {
-
+    let emotionsModalProps: IEmotionsModalProps = {date: new Date()};
     let props: IOverviewScreenProps = navProps.route.params;
+
 
     const [date, setDate] = useState(new Date());
 
@@ -18,6 +19,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                 mode={'date'}
                 value={date}
                 onChange={(newDate: Date) => {
+                    newDate.setHours(0, 0, 0, 0);
                     setDate(newDate);
                 }}
                 style={[styles.button, styles.calendarButton]}
@@ -37,7 +39,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                         style={styles.button}
                         onPress={() => {
 
-                            navProps.navigation.navigate("SleepModal", {});
+
                         }}
                     >
                         <Text>Diet</Text>
@@ -45,7 +47,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => {
-                            navProps.navigation.navigate("SleepModal", {});
+
                         }}
                     >
                         <Text>Activities</Text>
@@ -56,7 +58,8 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => {
-                            navProps.navigation.navigate("EmotionsModal", {});
+                            emotionsModalProps.date = date;
+                            navProps.navigation.navigate("EmotionsModal", emotionsModalProps);
                         }}
                     >
                         <Text>Emotions</Text>
@@ -64,7 +67,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => {
-                            navProps.navigation.navigate("SleepModal", {});
+
                         }}
                     >
                         <Text>Exposure</Text>
@@ -72,7 +75,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => {
-                            navProps.navigation.navigate("SleepModal", {});
+
                         }}
                     >
                         <Text>Interactions</Text>
