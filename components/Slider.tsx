@@ -10,6 +10,7 @@ export default function Slider(props: ISliderProps) {
         <>
             <View style={styles.view}>
                 <Text style={styles.text}>{props.text}</Text>
+                <Text>: {props.value}%</Text>
 
                 {
                     props.descriptionTitle != null ? (
@@ -22,13 +23,15 @@ export default function Slider(props: ISliderProps) {
 
                             style={styles.positionRight}
                         >
-                            <FontAwesomeIcon icon={faCircleInfo}/>
+                            <FontAwesomeIcon icon={faCircleInfo} size={20}/>
                         </TouchableOpacity>
                     ) : ("")
                 }
             </View>
 
+            <View style={styles.slider}>
             <ExternSlider
+                trackClickable={false}
                 value={props.value}
                 minimumValue={0}
                 maximumValue={100}
@@ -37,13 +40,17 @@ export default function Slider(props: ISliderProps) {
                     props.onValueChange(value as number);
                 }}
             />
+            </View>
 
-            <Text>Value: {props.value}%</Text>
+
         </>
     )
 }
 
 const styles = StyleSheet.create({
+    slider: {
+        marginBottom: 15,
+    },
     view: {
         marginTop: 20,
         alignItems: "flex-start",
@@ -52,7 +59,7 @@ const styles = StyleSheet.create({
     positionRight: {
         position: "absolute",
         right: 0,
-        top: 4
+        top: 3
     },
     text: {
         fontSize: 15
