@@ -3,22 +3,33 @@ import {useState} from "react";
 import {RootStackScreenProps} from "../../types";
 import {AirbnbRating} from 'react-native-ratings';
 import Calendar from "../../components/Calendar";
+import {SleepData} from "../../domain/SleepData";
 import {DayLogger} from "../../application/DayLogger";
+import {Day} from "../../domain/Day";
 
 
 export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">) {
 
     const [sleepTime, setSleepTime] = useState(new Date());
     const [time, setTime] = useState(new Date());
-    const [sleepRating, setSleepRating] = useState('');
+    const [sleepRating, setSleepRating] = useState(0);
     const [wakeUpTime, setWakeUpTime] = useState(new Date());
-    const [date, setDate] = useState(new Date());
+    
+    let day;
+    let dayLogger;
+    let sleepData;
+
 
     function saveSleepData() {
+        sleepData = new SleepData(sleepTime, wakeUpTime, sleepRating);
+        day = new Day(time);
+        dayLogger = new DayLogger(day);
+        dayLogger.logSleep(sleepTime, wakeUpTime, sleepRating);
+
         navProps.navigation.navigate('Root');
     }
 
-    function ratingCompleted(rating: string) {
+    function ratingCompleted(rating: number) {
         console.log("Rating is: " + rating)
         setSleepRating(rating);
     }
@@ -87,7 +98,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#dddddd',
     },
     button: {
-        borderRadius: 10,
+        borderRadius: 15,
         alignItems: "center",
         alignContent: "center",
         textAlign: 'center',
@@ -95,7 +106,7 @@ const styles = StyleSheet.create({
         width: '75%',
         paddingVertical: 20,
         marginTop: 20,
-        backgroundColor: "#DDDDDD",
+        backgroundColor: "rgba(178,199,235,0.37)",
     },
     saveButton: {
         borderRadius: 10,
@@ -106,7 +117,7 @@ const styles = StyleSheet.create({
         width: '95%',
         paddingVertical: 20,
         marginTop: 20,
-        backgroundColor: "#DDDDDD",
+        backgroundColor: "rgba(178,199,235,0.37)",
         position: "absolute",
         bottom:25,
         marginLeft:20,
