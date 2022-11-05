@@ -21,7 +21,7 @@ export default function Calendar(props: ICalendarProps) {
     };
 
     const showDatepicker = () => {
-        showMode('date');
+        showMode(props.mode);
     };
 
     return (

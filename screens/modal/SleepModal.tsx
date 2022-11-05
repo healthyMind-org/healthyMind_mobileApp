@@ -1,8 +1,8 @@
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 import {useState} from "react";
-import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
 import {RootStackScreenProps} from "../../types";
 import { Rating} from 'react-native-ratings';
+import Calendar from "../../components/Calendar";
 
 
 
@@ -12,26 +12,6 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
     const [time, setTime] = useState(new Date());
     const [sleepRating, setSleepRating] = useState('')
 
-    // const onChange = (event: any, selectedDate: Date) => {
-    //     const currentDate = selectedDate;
-    //     setShow(false);
-    //     setDate(currentDate);
-    // };
-    //
-    //
-    // const showMode = (currentMode:any) => {
-    //         setShow(false);
-    //     setMode(currentMode);
-    // };
-
-    // const showDatepicker = () => {
-    //     showMode('date');
-    // };
-    //
-    // const showTimepicker = () => {
-    //     showMode('time');
-    // };
-
     function saveSleepData(){
         console.log("save")
         navProps.navigation.navigate('Root');
@@ -40,6 +20,14 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
     function ratingCompleted(rating: string) {
         console.log("Rating is: " + rating)
         setSleepRating(rating);
+    }
+
+    function onSleepTimeChange(){
+
+    }
+
+    function onWakeUpTimeChange(){
+
     }
 
     return (
@@ -53,8 +41,13 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
                 {/*    style={{width: 300, opacity: 1, height: 30, marginTop: 50}}*/}
                 {/*    onChange={onTimeChange}*/}
                 {/*/>*/}
-                {/*<Button onPress={showTimepicker} title="Show time picker!" />*/}
-                <Button title={'placeholder'}/>
+                <Calendar
+                    mode={'time'}
+                    onChange={onSleepTimeChange}
+                    style={[styles.button, styles.calendarButton]}
+                    value={time}
+                />
+
                 <Text>selected: {Date.toLocaleString()}</Text>
                 {/*{show && (*/}
                 {/*    <DateTimePicker*/}
@@ -65,6 +58,12 @@ export default function SleepModal(navProps: RootStackScreenProps<"SleepModal">)
                 {/*        onChange={onChange}*/}
                 {/*    />*/}
                 {/*)}*/}
+                <Calendar
+                    mode={'time'}
+                    onChange={onWakeUpTimeChange}
+                    style={[styles.button, styles.calendarButton]}
+                    value={time}
+                />
             </View>
             <View >
                 <Text style={styles.title}> Wake up: </Text>
@@ -102,5 +101,20 @@ const styles = StyleSheet.create({
         marginVertical: 30,
         height: 1,
         width: '80%',
+    },
+    calendarButton: {
+        width: '100%',
+        backgroundColor: '#dddddd',
+    },
+    button: {
+        borderRadius: 10,
+        alignItems: "center",
+        alignContent: "center",
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        width: '75%',
+        paddingVertical: 20,
+        marginTop: 20,
+        backgroundColor: "#DDDDDD",
     },
 });

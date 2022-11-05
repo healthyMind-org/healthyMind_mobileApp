@@ -14,6 +14,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
         <View style={styles.container}>
 
             <Calendar
+                mode={'date'}
                 value={date}
                 onChange={(newDate: Date) => {
                     setDate(newDate);
