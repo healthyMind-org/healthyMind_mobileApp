@@ -29,10 +29,12 @@ export default function EmotionsModal(navProps: RootStackScreenProps<"EmotionsMo
         let mentalState = MentalState.getInstance();
         for (let i = 0; i < mentalState.days.length; i++) {
             if (mentalState.days[i].date.toISOString() === emotionsModalProps.date.toISOString()) {
-                setAllScores(mentalState.days[i].emotionData as EmotionData);
+                if (mentalState.days[i].emotionData != null) {
+                    setAllScores(mentalState.days[i].emotionData as EmotionData);
+                }
             }
         }
-    },[]);
+    }, []);
 
     function setAllScores(emotionData: EmotionData) {
         setDepressionScore(emotionData.depressionLevel);
