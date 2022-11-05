@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(178,199,235,0.37)",
     },
     title: {
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 10,
     },

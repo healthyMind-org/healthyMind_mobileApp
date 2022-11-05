@@ -7,6 +7,7 @@ import {MentalState} from "../../domain/MentalState";
 import {ExposureData} from "../../domain/ExposureData";
 import {Day} from "../../domain/Day";
 import {DayLogger} from "../../application/DayLogger";
+import {trackMarkStyles} from "@miblanchard/react-native-slider/lib/stories/styles";
 
 enum POLLUTION_LVL {
     GOOD = "Good",
@@ -74,9 +75,12 @@ const SliderContainer = (props: SliderContainer) => {
 
     if (trackMarks?.length && (!Array.isArray(value) || value?.length === 1)) {
         // @ts-ignore
-        renderTrackMarkComponent = () => {
+        renderTrackMarkComponent = (index: number) => {
+            const currentMarkValue = trackMarks[index];
+            const currentSliderValue = value || (Array.isArray(value) && value[0]) || 0;
+
             let markStyle = {
-                borderColor: "#ee8181",
+                borderColor: currentMarkValue > Math.max(currentSliderValue) ? "#ee8181" : "grey",
                 borderWidth: 3,
                 left: 10,
             };
@@ -128,7 +132,7 @@ export default function ExposureModal(navProps: RootStackScreenProps<"ExposureMo
 
         for (let i = 0; i < mentalState.days.length; i++) {
             if (mentalState.days[i].date.toISOString() === props.date.toISOString()) {
-                if(mentalState.days[i].exposureData != null) {
+                if (mentalState.days[i].exposureData != null) {
                     setAllScores(mentalState.days[i].exposureData as ExposureData);
                 }
             }
@@ -146,45 +150,47 @@ export default function ExposureModal(navProps: RootStackScreenProps<"ExposureMo
         <></>
     ) : (
         <View style={styles.outerContainer}>
-            <Text style={styles.title}>What is the pollution level in your area?</Text>
-
             <ScrollView style={{height: "80%"}}>
                 <View style={styles.container}>
+                    <Text style={styles.title}>What is the pollution level in your area?</Text>
                     <View style={styles.view}>
-                        <Text style={styles.text}>Pollution</Text>
+                        <Text style={styles.text}>Pollution: {pollutionScore}%</Text>
                     </View>
-                    <SliderContainer
-                        trackMarks={[10, 20, 30, 40, 60]}
-                        onValueChange={value => setPollutionScore(value as number)}
-                        text={getPollutionStateText(pollutionScore)}
-                        sliderValue={pollutionScore}
-                    >
-                        <Slider
-                            maximumValue={100}
-                            minimumValue={0}
-                            step={1}
-                        />
-                    </SliderContainer>
-                    <Text style={styles.value}>Value: {pollutionScore}%</Text>
+
+                    <View style={styles.slider}>
+                        <SliderContainer
+                            trackMarks={[10, 20, 30, 40, 60]}
+                            onValueChange={value => setPollutionScore(value as number)}
+                            text={getPollutionStateText(pollutionScore)}
+                            sliderValue={pollutionScore}
+                        >
+                            <Slider
+                                maximumValue={100}
+                                minimumValue={0}
+                                step={1}
+                            />
+                        </SliderContainer>
+                    </View>
 
                     <Text style={styles.title}>Did any Disasters happen in your area?</Text>
-
                     <View style={styles.view}>
-                        <Text style={styles.text}>Disaster</Text>
+                        <Text style={styles.text}>Disaster: {disasterScore}%</Text>
                     </View>
-                    <SliderContainer
-                        trackMarks={[0, 20, 40, 60, 80, 100]}
-                        onValueChange={value => setDisasterScore(value as number)}
-                        text={getDisasterStateText(disasterScore)}
-                        sliderValue={disasterScore}
-                    >
-                        <Slider
-                            maximumValue={100}
-                            minimumValue={0}
-                            step={20}
-                        />
-                    </SliderContainer>
-                    <Text>Value: {disasterScore}%</Text>
+
+                    <View style={styles.slider}>
+                        <SliderContainer
+                            trackMarks={[0, 20, 40, 60, 80, 100]}
+                            onValueChange={value => setDisasterScore(value as number)}
+                            text={getDisasterStateText(disasterScore)}
+                            sliderValue={disasterScore}
+                        >
+                            <Slider
+                                maximumValue={100}
+                                minimumValue={0}
+                                step={20}
+                            />
+                        </SliderContainer>
+                    </View>
                 </View>
             </ScrollView>
 
@@ -210,8 +216,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    value: {
-      marginBottom: 15,
+    slider: {
+        marginBottom: 20,
     },
     button: {
         borderRadius: 10,
@@ -221,8 +227,8 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
         width: '100%',
         paddingVertical: 20,
-        marginTop: 20,
-        backgroundColor: "#DDDDDD",
+        marginTop: 60,
+        backgroundColor: "rgba(178,199,235,0.37)",
     },
     view: {
         marginTop: 20,
