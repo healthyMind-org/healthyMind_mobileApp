@@ -1,4 +1,4 @@
-import {StyleSheet, View, Text, AppRegistry, ScrollView, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import {Slider} from "@miblanchard/react-native-slider";
 import {useState} from "react";
 
