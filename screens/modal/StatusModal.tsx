@@ -1,5 +1,5 @@
 import {RootStackScreenProps} from "../../types";
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {
     faFaceAngry,
@@ -50,105 +50,145 @@ export default function StatusModal(navProps: RootStackScreenProps<"StatusModal"
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}> Emotions </Text>
-            <View style={styles.innerContainer}>
-                <FontAwesomeIcon
-                    //depression
-                    icon={faCloudShowersHeavy}
-                    size={45}
-                    style={styles.icons}
-                />
-                <FontAwesomeIcon
-                    //angry
-                    icon={faFaceAngry}
-                    size={45}
-                    style={styles.icons}
-                />
-                <FontAwesomeIcon
-                    //anxious
-                    icon={faFaceTired}
-                    size={45}
-                    style={styles.icons}
-                />
-                <FontAwesomeIcon
-                    //happy
-                    icon={faFaceLaughBeam}
-                    size={45}
-                    style={styles.icons}
-                />
-            </View>
-            <View style={styles.innerContainer}>
-                <Text style={styles.text}>depression: {emotionalData.depressionLevel} %</Text>
-                <Text style={styles.text}>anger: {emotionalData.angerLevel} %</Text>
-                <Text style={styles.text}>anxiety: {emotionalData.anxietyLevel} %</Text>
-                <Text style={styles.text}>happiness: {emotionalData.happinessLevel} %</Text>
-            </View>
-            <View style={styles.innerContainer}>
-                <FontAwesomeIcon
-                    //fearfull
-                    icon={faFaceSurprise}
-                    size={45}
-                    style={styles.icons}
-                />
-                <FontAwesomeIcon
-                    //disgusted
-                    icon={faFaceRollingEyes}
-                    size={45}
-                    style={styles.icons}
-                />
-                <FontAwesomeIcon
-                    //overwellmed
-                    icon={faFaceSmileBeam}
-                    size={45}
-                    style={styles.icons}
-                />
-                <FontAwesomeIcon
-                    //distressed
-                    icon={faFaceMehBlank}
-                    size={45}
-                    style={styles.icons}
-                />
-            </View>
-            <View style={styles.innerContainer}>
-                <Text style={styles.text}>fear: {emotionalData.fearLevel} %</Text>
-                <Text style={styles.text}>disgust: {emotionalData.disgustLevel} %</Text>
-                <Text style={styles.text}>overwhelm: {emotionalData.overwhelmLevel} %</Text>
-                <Text style={styles.text}>distress: {emotionalData.distressLevel} %</Text>
-            </View>
+        <View>
+            <ScrollView>
+                <View style={styles.container}>
+                    <Text style={styles.title}> Emotions </Text>
+                    <View style={styles.innerContainer}>
+                        <View style={styles.innerInnerContainer}>
+                            <FontAwesomeIcon
+                                //depression
+                                icon={faCloudShowersHeavy}
+                                size={45}
+                                style={styles.icons}
+                            />
+                            <Text style={styles.text}>Depression</Text>
+                            <Text style={styles.text}>{emotionalData.depressionLevel} %</Text>
+                        </View>
+                        <View style={styles.innerInnerContainer}>
+                            <FontAwesomeIcon
+                                //angry
+                                icon={faFaceAngry}
+                                size={45}
+                                style={styles.icons}
+                            />
+                            <Text style={styles.text}>Anger</Text>
+                            <Text style={styles.text}>{emotionalData.angerLevel} %</Text>
+                        </View>
+                        <View style={styles.innerInnerContainer}>
+                            <FontAwesomeIcon
+                                //anxious
+                                icon={faFaceTired}
+                                size={45}
+                                style={styles.icons}
+                            />
+                            <Text style={styles.text}>Anxiety</Text>
+                            <Text style={styles.text}>{emotionalData.anxietyLevel} %</Text>
+                        </View>
+                        <View style={styles.innerInnerContainer}>
+                            <FontAwesomeIcon
+                                //happy
+                                icon={faFaceLaughBeam}
+                                size={45}
+                                style={styles.icons}
+                            />
+                            <Text style={styles.text}>Happiness</Text>
+                            <Text style={styles.text}>{emotionalData.happinessLevel} %</Text>
+                        </View>
+                    </View>
 
-            <Text style={styles.title}> Exposure </Text>
-            <View style={styles.innerContainer}>
-                <FontAwesomeIcon
-                    //Pollution
-                    icon={faSmog}
-                    size={45}
-                    style={styles.icons}
-                />
-                <FontAwesomeIcon
-                    //disasters
-                    icon={faTornado}
-                    size={45}
-                    style={styles.icons}
-                />
-            </View>
-            <View style={styles.innerContainer}>
-                <Text style={styles.text}>pollution: {exposureData.pollutionLevel} %</Text>
-                <Text style={styles.text}>disaster: {exposureData.disasterLevel} %</Text>
-            </View>
-            <Text style={styles.title}> Sleep </Text>
-            <View style={styles.innerContainer}>
-                <FontAwesomeIcon
-                    //sleep
-                    icon={faBed}
-                    size={45}
-                    style={styles.icons}
-                />
-            </View>
-            <View style={styles.innerContainer}>
-                <Text style={styles.text}>Quality: {sleepData.quality} %</Text>
-            </View>
+                    <View style={styles.innerContainer}>
+                        <View style={styles.innerInnerContainer}>
+                            <FontAwesomeIcon
+                                //fearful
+                                icon={faFaceSurprise}
+                                size={45}
+                                style={styles.icons}
+                            />
+                            <Text style={styles.text}>Fear</Text>
+                            <Text style={styles.text}>{emotionalData.fearLevel} %</Text>
+                        </View>
 
+                        <View style={styles.innerInnerContainer}>
+                            <FontAwesomeIcon
+                                //disgusted
+                                icon={faFaceRollingEyes}
+                                size={45}
+                                style={styles.icons}
+                            />
+                            <Text style={styles.text}>Disgust</Text>
+                            <Text style={styles.text}>{emotionalData.disgustLevel} %</Text>
+                        </View>
+                        <View style={styles.innerInnerContainer}>
+                            <FontAwesomeIcon
+                                //overwhelmed
+                                icon={faFaceSmileBeam}
+                                size={45}
+                                style={styles.icons}
+                            />
+
+                            <Text style={styles.text}>Overwhelm</Text>
+                            <Text style={styles.text}>{emotionalData.overwhelmLevel} %</Text>
+                        </View>
+
+                    </View>
+                    <View style={styles.innerContainer}>
+
+                        {/*<View style={styles.innerInnerContainer}>*/}
+                        {/*    <FontAwesomeIcon*/}
+                        {/*        //distressed*/}
+                        {/*        icon={faFaceMehBlank}*/}
+                        {/*        size={45}*/}
+                        {/*        style={styles.icons}*/}
+                        {/*    />*/}
+
+                        {/*    <Text style={styles.text}>distress: {emotionalData.distressLevel} %</Text>*/}
+                        {/*</View>*/}
+
+                    </View>
+
+                    <Text style={styles.title}> Exposure </Text>
+                    <View style={styles.innerContainer}>
+                        <View style={styles.innerInnerContainer}>
+                            <FontAwesomeIcon
+                                //Pollution
+                                icon={faSmog}
+                                size={45}
+                                style={styles.icons}
+                            />
+                            <Text style={styles.text}>Pollution:</Text>
+                            <Text style={styles.text}>{exposureData.pollutionLevel} %</Text>
+                        </View>
+                        <View style={styles.innerInnerContainer}>
+                            <FontAwesomeIcon
+                                //disasters
+                                icon={faTornado}
+                                size={45}
+                                style={styles.icons}
+                            />
+                            <Text style={styles.text}>Disasters:</Text>
+                            <Text style={styles.text}>{exposureData.disasterLevel} %</Text>
+                        </View>
+                    </View>
+                    <Text style={styles.title}> Sleep </Text>
+                    <View style={styles.innerContainer}>
+                        <View style={styles.innerInnerContainer}>
+                        <FontAwesomeIcon
+                            //sleep
+                            icon={faBed}
+                            size={45}
+                            style={styles.icons}
+                        />
+                        <Text style={styles.text}>Sleep:</Text>
+                        <Text style={styles.text}>{sleepData.quality * 20} %</Text>
+                        </View>
+                    </View>
+
+
+
+                </View>
+
+            </ScrollView>
             <TouchableOpacity
                 style={styles.saveButton}
                 onPress={shareResults}
@@ -161,29 +201,38 @@ export default function StatusModal(navProps: RootStackScreenProps<"StatusModal"
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        alignItems: 'stretch',
+    },
+    innerInnerContainer: {
         flexDirection: 'column',
-        alignItems: 'baseline',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignContent: 'center',
+        margin: 15,
+        alignSelf: 'center',
+
     },
     innerContainer: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        marginLeft: 10,
-        marginBottom: 20,
+        flex: 1,
+        justifyContent: 'center',
+        alignContent: 'center',
+        // marginLeft: 10,
+        // marginBottom: 20,
     },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
     },
     icons: {
-        marginRight: 30,
         borderStyle: "solid",
         borderColor: 'lightgreen',
-        alignItems: 'center',
+        marginHorizontal: 10,
     },
     text: {
         fontSize: 12,
-        marginRight: 8,
-        alignItems: 'center',
+
     },
     saveButton: {
         borderRadius: 10,
@@ -193,10 +242,10 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
         width: '90%',
         paddingVertical: 20,
-        marginTop: 20,
+        marginTop: 200,
         backgroundColor: "rgba(178,199,235,0.37)",
         position: "absolute",
-        bottom: 25,
+        top: 380,
         marginLeft: 20,
     },
 });
