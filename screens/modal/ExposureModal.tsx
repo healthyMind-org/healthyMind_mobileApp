@@ -227,8 +227,8 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
         width: '100%',
         paddingVertical: 20,
-        marginTop: 20,
-        backgroundColor: "#DDDDDD",
+        marginTop: 60,
+        backgroundColor: "rgba(178,199,235,0.37)",
     },
     view: {
         marginTop: 20,
