@@ -1,19 +1,19 @@
 export class EmotionData {
-    private angerLevel: number;
-    private distressLevel: number;
-    private overwhelmLevel: number;
-    private happinessLevel: number;
-    private fearLevel: number;
-    private disgustLevel: number;
-    private calmnessLevel: number;
-    private anxietyLevel: number;
+    readonly angerLevel: number;
+    readonly distressLevel: number;
+    readonly overwhelmLevel: number;
+    readonly happinessLevel: number;
+    readonly fearLevel: number;
+    readonly disgustLevel: number;
+    readonly calmnessLevel: number;
+    readonly anxietyLevel: number;
 
 
-    constructor(angerLevel: number, distressLevel: number, overwhelmLevel: number, hapinessLevel: number, fearLevel: number, disgustLevel: number, calmnessLevel: number, anxietyLevel: number) {
+    constructor(angerLevel: number, distressLevel: number, overwhelmLevel: number, happinessLevel: number, fearLevel: number, disgustLevel: number, calmnessLevel: number, anxietyLevel: number) {
         this.angerLevel = angerLevel;
         this.distressLevel = distressLevel;
         this.overwhelmLevel = overwhelmLevel;
-        this.happinessLevel = hapinessLevel;
+        this.happinessLevel = happinessLevel;
         this.fearLevel = fearLevel;
         this.disgustLevel = disgustLevel;
         this.calmnessLevel = calmnessLevel;

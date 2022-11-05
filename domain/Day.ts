@@ -2,10 +2,12 @@ import {EmotionData} from "./EmotionData";
 import {SleepData} from "./SleepData";
 
 export class Day {
-    readonly emotionData: EmotionData;
-    readonly sleepData: SleepData;
+    readonly date: Date;
+    public emotionData: EmotionData | undefined;
+    public sleepData: SleepData | undefined;
 
-    constructor(emotionData: EmotionData, sleepData: SleepData) {
+    constructor(date: Date, emotionData?: EmotionData, sleepData?: SleepData) {
+        this.date = date;
         this.emotionData = emotionData;
         this.sleepData = sleepData;
     }
