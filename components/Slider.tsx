@@ -1,6 +1,8 @@
 import {ISliderProps} from "./api/ISliderProps";
-import {StyleSheet, Text, View} from "react-native";
+import {Alert, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {Slider as ExternSlider} from "@miblanchard/react-native-slider";
+import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
+import {faCircleInfo} from "@fortawesome/free-solid-svg-icons";
 
 export default function Slider(props: ISliderProps) {
 
@@ -8,7 +10,24 @@ export default function Slider(props: ISliderProps) {
         <>
             <View style={styles.view}>
                 <Text style={styles.text}>{props.text}</Text>
+
+                {
+                    props.descriptionTitle != null ? (
+                        <TouchableOpacity
+                            onPress={() => {
+                                if (props.descriptionTitle != null) {
+                                    Alert.alert(props.descriptionTitle, props.description);
+                                }
+                            }}
+
+                            style={styles.positionRight}
+                        >
+                            <FontAwesomeIcon icon={faCircleInfo}/>
+                        </TouchableOpacity>
+                    ) : ("")
+                }
             </View>
+
             <ExternSlider
                 value={props.value}
                 minimumValue={0}
@@ -18,6 +37,7 @@ export default function Slider(props: ISliderProps) {
                     props.onValueChange(value as number);
                 }}
             />
+
             <Text>Value: {props.value}%</Text>
         </>
     )
@@ -27,6 +47,12 @@ const styles = StyleSheet.create({
     view: {
         marginTop: 20,
         alignItems: "flex-start",
+        flexDirection: "row"
+    },
+    positionRight: {
+        position: "absolute",
+        right: 0,
+        top: 4
     },
     text: {
         fontSize: 15
