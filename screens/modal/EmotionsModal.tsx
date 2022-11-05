@@ -20,7 +20,6 @@ export default function EmotionsModal() {
             <ScrollView style={{height: "80%"}}>
                 <View style={styles.container}>
 
-
                     <View style={styles.view}>
                         <Text style={styles.text}>Depressed</Text>
                     </View>

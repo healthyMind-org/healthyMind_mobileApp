@@ -1,11 +1,107 @@
 import {RootStackScreenProps} from "../../types";
-import {Text, View} from "react-native";
+import {StyleSheet, Text, View} from "react-native";
+import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
+import {faFaceAngry, faFaceLaughBeam, faFaceSurprise, faFaceTired} from "@fortawesome/free-regular-svg-icons";
+import {faCloudShowersHeavy} from "@fortawesome/free-solid-svg-icons";
+import {useState} from "react";
+import {MentalState} from "../../domain/MentalState";
+import {SleepData} from "../../domain/SleepData";
 
-export default function StatusModal(navProps: RootStackScreenProps<"StatusModal">){
 
-    return(
-        <View>
-            <Text>gaht doch </Text>
+export default function StatusModal(navProps: RootStackScreenProps<"StatusModal">) {
+    const [date, setDate] = useState(new Date())
+
+    let mentalData = MentalState.getInstance();
+    console.log(mentalData.depressionScore)
+
+    let sleepData;
+
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}> Emotions </Text>
+            <View style={styles.innerContainer}>
+                <FontAwesomeIcon
+                    icon={faCloudShowersHeavy}
+                    size={45}
+                    style={styles.icons}
+                />
+                <FontAwesomeIcon
+                    icon={faFaceTired}
+                    size={45}
+                    style={styles.icons}
+                />
+                <FontAwesomeIcon
+                    icon={faFaceAngry}
+                    size={45}
+                    style={styles.icons}
+                />
+                <FontAwesomeIcon
+                    icon={faFaceLaughBeam}
+                    size={45}
+                    style={styles.icons}
+                />
+                <FontAwesomeIcon
+                    icon={faFaceSurprise}
+                    size={45}
+                    style={styles.icons}
+                />
+            </View>
+            <View style={styles.innerContainer}>
+                <Text style={styles.title}> Exposure </Text>
+            </View>
+
+            <View style={styles.innerContainer}>
+                <Text style={styles.title}> Sleep </Text>
+            </View>
         </View>
     )
 }
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'baseline',
+    },
+    innerContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+    },
+    item: {
+        alignItems: 'center',
+        width: '50%',
+        paddingTop: 20
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+    separator: {
+        marginVertical: 30,
+        height: 1,
+        width: '80%',
+    },
+    button: {
+        borderRadius: 10,
+        alignItems: "center",
+        alignContent: "center",
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        width: '75%',
+        paddingVertical: 20,
+        marginTop: 20,
+        backgroundColor: "#DDDDDD",
+    },
+    statusButton: {
+        width: '88%',
+        marginHorizontal: 25,
+    },
+    calendarButton: {
+        width: '100%',
+        backgroundColor: '#dddddd',
+    },
+    icons: {
+        marginLeft: 20,
+    }
+});
