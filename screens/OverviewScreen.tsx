@@ -3,6 +3,7 @@ import {RootTabScreenProps} from '../types';
 import Calendar from "../components/Calendar";
 import {useState} from "react";
 import {IOverviewScreenProps} from "./api/IOverviewScreenProps";
+import {Day} from "../domain/Day";
 
 export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScreen'>) {
 
