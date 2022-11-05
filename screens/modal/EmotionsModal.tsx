@@ -1,5 +1,5 @@
 import {StyleSheet, View, Text, ScrollView, TouchableOpacity} from 'react-native';
-import {Slider} from "@miblanchard/react-native-slider";
+
 import {useEffect, useState} from "react";
 import {IEmotionsModalProps} from "./api/IEmotionsModalProps";
 import {DayLogger} from "../../application/DayLogger";
@@ -9,6 +9,7 @@ import {MentalState} from "../../domain/MentalState";
 import {EmotionData} from "../../domain/EmotionData";
 import {RootStackScreenProps} from "../../types";
 import {faCircleInfo} from "@fortawesome/free-solid-svg-icons";
+import Slider from "../../components/Slider";
 
 export default function EmotionsModal(navProps: RootStackScreenProps<"EmotionsModal">) {
     let emotionsModalProps = navProps.route.params;
@@ -51,85 +52,72 @@ export default function EmotionsModal(navProps: RootStackScreenProps<"EmotionsMo
 
             <ScrollView style={{height: "80%"}}>
                 <View style={styles.container}>
-
-                    <View style={styles.view}>
-                        <Text style={styles.text}>Depressed</Text>
-                    </View>
                     <Slider
+                        text={"Depressed"}
                         value={depressionScore}
-                        onValueChange={value => setDepressionScore(value as number)}
+                        onValueChange={(value) => {
+                            setDepressionScore(value);
+                        }}
                     />
-                    <Text>Value: {(depressionScore * 100).toFixed(0)}%</Text>
-
-                    <View style={styles.view}>
-                        <Text style={styles.text}>Angry</Text>
-                    </View>
                     <Slider
+                        text={"Angry"}
                         value={angerScore}
-                        onValueChange={value => setAngerScore(value as number)}
+                        onValueChange={(value) => {
+                            setAngerScore(value);
+                        }}
                     />
-                    <Text>Value: {(angerScore * 100).toFixed(0)}%</Text>
-
-                    <View style={styles.view}>
-                        <Text style={styles.text}>Anxious</Text>
-                    </View>
                     <Slider
+                        text={"Anxious"}
                         value={anxietyScore}
-                        onValueChange={value => setAnxietyScore(value as number)}
+                        onValueChange={(value) => {
+                            setAnxietyScore(value);
+                        }}
                     />
-                    <Text>Value: {(anxietyScore * 100).toFixed(0)}%</Text>
-
-                    <View style={styles.view}>
-                        <Text style={styles.text}>Distress</Text>
-                    </View>
                     <Slider
+                        text={"Distress"}
                         value={distressScore}
-                        onValueChange={value => setDistressScore(value as number)}
+                        onValueChange={(value) => {
+                            setDistressScore(value);
+                        }}
                     />
-                    <Text>Value: {(distressScore * 100).toFixed(0)}%</Text>
-                    <View style={styles.view}>
-                        <Text style={styles.text}>Overwhelmed</Text>
-                    </View>
                     <Slider
+                        text={"Overwhelmed"}
                         value={overwhelmScore}
-                        onValueChange={value => setOverwhelmScore(value as number)}
+                        onValueChange={(value) => {
+                            setOverwhelmScore(value);
+                        }}
                     />
-                    <Text>Value: {(overwhelmScore * 100).toFixed(0)}%</Text>
-                    <View style={styles.view}>
-                        <Text style={styles.text}>Happy</Text>
-                    </View>
                     <Slider
+                        text={"Happy"}
                         value={happinessScore}
-                        onValueChange={value => setHappinessScore(value as number)}
+                        onValueChange={(value) => {
+                            setHappinessScore(value);
+                        }}
                     />
-                    <Text>Value: {(happinessScore * 100).toFixed(0)}%</Text>
-                    <View style={styles.view}>
-                        <Text style={styles.text}>Fearful</Text>
-                    </View>
                     <Slider
+                        text={"Fearful"}
                         value={fearScore}
-                        onValueChange={value => setFearScore(value as number)}
+                        onValueChange={(value) => {
+                            setFearScore(value);
+                        }}
                     />
-                    <Text>Value: {(fearScore * 100).toFixed(0)}%</Text>
-                    <View style={styles.view}>
-                        <Text style={styles.text}>Disgusted</Text>
-                    </View>
                     <Slider
+                        text={"Disgusted"}
                         value={disgustScore}
-                        onValueChange={value => setDisgustScore(value as number)}
+                        onValueChange={(value) => {
+                            setDisgustScore(value);
+                        }}
                     />
-                    <Text>Value: {(disgustScore * 100).toFixed(0)}%</Text>
-                    <View style={styles.view}>
-                        <Text style={styles.text}>Calm</Text>
-                    </View>
                     <Slider
+                        text={"Calm"}
                         value={calmnessScore}
-                        onValueChange={value => setCalmnessScore(value as number)}
+                        onValueChange={(value) => {
+                            setCalmnessScore(value);
+                        }}
                     />
-                    <Text>Value: {(calmnessScore * 100).toFixed(0)}%</Text>
                 </View>
-
             </ScrollView>
+
             <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
