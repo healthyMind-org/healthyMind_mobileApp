@@ -35,6 +35,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => {
+
                             navProps.navigation.navigate("SleepModal", {});
                         }}
                     >

@@ -5,6 +5,7 @@ import {ICalendarProps} from "./api/ICalendarProps";
 
 export default function Calendar(props: ICalendarProps) {
     const [date, setDate] = useState(props.value);
+    const [currentMode, setCurrentMode] = useState(props.mode)
 
     const onChange = (event: any, selectedDate: any) => {
         setDate(selectedDate);
@@ -18,11 +19,22 @@ export default function Calendar(props: ICalendarProps) {
             mode: currentMode,
             is24Hour: true,
         });
+        setCurrentMode(currentMode);
     };
 
     const showDatepicker = () => {
         showMode(props.mode);
     };
+
+    const setText = () => {
+        let value;
+        if (currentMode === 'time'){
+             value = date.toTimeString();
+        }else {
+            value = date.toLocaleString();
+        }
+        return value
+    }
 
     return (
         <>
@@ -30,7 +42,7 @@ export default function Calendar(props: ICalendarProps) {
                 style={props.style != null ? props.style : styles.button}
                 onPress={showDatepicker}
             >
-                <Text>{date.toLocaleString()}</Text>
+                <Text>{`${setText()}`}</Text>
             </TouchableOpacity>
         </>
     );
