@@ -10,6 +10,7 @@ import {IOverviewScreenProps} from "./screens/api/IOverviewScreenProps";
 import {ISleepModalProps} from "./screens/modal/api/ISleepModalProps";
 import {INotFoundProps} from "./screens/api/INotFoundProps";
 import {IEmotionsModalProps} from "./screens/modal/api/IEmotionsModalProps";
+import {IStatusModalProps} from "./screens/modal/api/IStatusModalProps";
 
 declare global {
     namespace ReactNavigation {
@@ -22,6 +23,7 @@ export type RootStackParamList = {
     Root: NavigatorScreenParams<RootTabParamList> | undefined;
     SleepModal: ISleepModalProps;
     EmotionsModal: IEmotionsModalProps;
+    StatusModal: IStatusModalProps;
     NotFound: INotFoundProps;
 };
 

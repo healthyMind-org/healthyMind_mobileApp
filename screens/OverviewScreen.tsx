@@ -82,7 +82,7 @@ export default function OverviewScreen(navProps: RootTabScreenProps<'OverviewScr
                 <TouchableOpacity
                     style={[styles.button, styles.statusButton]}
                     onPress={() => {
-                        navProps.navigation.navigate("SleepModal", {});
+                        navProps.navigation.navigate("StatusModal", {});
                     }}
                 >
                     <Text>Status</Text>
