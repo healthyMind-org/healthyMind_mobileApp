@@ -165,7 +165,9 @@ export default function ExposureModal(navProps: RootStackScreenProps<"ExposureMo
                             step={1}
                         />
                     </SliderContainer>
-                    <Text>Value: {pollutionScore}%</Text>
+                    <Text style={styles.value}>Value: {pollutionScore}%</Text>
+
+                    <Text style={styles.title}>Did any Disasters happen in your area?</Text>
 
                     <View style={styles.view}>
                         <Text style={styles.text}>Disaster</Text>
@@ -208,6 +210,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
+    value: {
+      marginBottom: 15,
+    },
     button: {
         borderRadius: 10,
         alignItems: "center",
@@ -229,7 +234,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 18,
         fontWeight: 'bold',
-        marginBottom: 10,
     },
     separator: {
         marginVertical: 30,
