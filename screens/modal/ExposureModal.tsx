@@ -57,14 +57,16 @@ const getDisasterStateText = (value: number) => {
     }
 }
 
-const SliderContainer = (props: {
+type SliderContainer = {
     children: React.ReactElement;
     onValueChange: (value: number) => void;
     text: string;
     sliderValue?: number | Array<number>;
     trackMarks?: Array<number>;
     vertical?: boolean;
-}) => {
+}
+
+const SliderContainer = (props: SliderContainer) => {
     const {sliderValue, trackMarks} = props;
     const [value, setValue] = useState(sliderValue ? sliderValue : 1);
 
