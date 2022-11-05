@@ -62,11 +62,11 @@ export default function EmotionsModal(navProps: RootStackScreenProps<"EmotionsMo
                     />
                     <Text>Value: {(depressionScore * 100).toFixed(0)}%</Text>
                     <View style={styles.view}>
-                        <Text style={styles.text}>Anxious</Text>
+                        <Text style={styles.text}>Angry</Text>
                     </View>
                     <Slider
                         value={anxietyScore}
-                        onValueChange={value => setAnxietyScore(value as number)}
+                        onValueChange={value => setAngerScore(value as number)}
                     />
                     <Text>Value: {(anxietyScore * 100).toFixed(0)}%</Text>
                     <View style={styles.view}>
