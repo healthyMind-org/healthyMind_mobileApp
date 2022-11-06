@@ -14,6 +14,9 @@ import OverviewScreen from '../screens/OverviewScreen';
 import {RootStackParamList, RootTabParamList} from '../types';
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {faChevronLeft, faHouse} from "@fortawesome/free-solid-svg-icons";
+import EmotionsModal from "../screens/modal/EmotionsModal";
+import StatusModal from "../screens/modal/StatusModal";
+import ExposureModal from "../screens/modal/ExposureModal";
 
 export default function Navigation() {
     return (
@@ -55,7 +58,7 @@ function RootNavigator() {
                         )
                     },
                     headerStyle: {
-                        backgroundColor: '#ded8c1',
+                        backgroundColor: '#b2c7eb',
                     },
                 })}
             >
@@ -63,6 +66,21 @@ function RootNavigator() {
                     name="SleepModal"
                     component={SleepModal}
                     options={{title: "Sleep"}}
+                />
+                <Stack.Screen
+                    name="EmotionsModal"
+                    component={EmotionsModal}
+                    options={{title: "Emotions"}}
+                />
+                <Stack.Screen
+                    name="StatusModal"
+                    component={StatusModal}
+                    options={{title: "Status"}}
+                />
+                <Stack.Screen
+                    name="ExposureModal"
+                    component={ExposureModal}
+                    options={{title: "Exposure"}}
                 />
             </Stack.Group>
         </Stack.Navigator>
@@ -81,24 +99,33 @@ function BottomTabNavigator() {
         <Tab.Navigator
             initialRouteName="OverviewScreen"
             screenOptions={() => ({
-                tabBarActiveTintColor: '#7b8f4b',
+                tabBarActiveTintColor: '#3a7075',
                 tabBarInactiveTintColor: 'grey',
-                tabBarActiveBackgroundColor: '#f0ead2',
-                tabBarInactiveBackgroundColor: '#f0ead2',
+                tabBarActiveBackgroundColor: '#b2c7eb',
+                tabBarInactiveBackgroundColor: '#b2c7eb',
                 tabBarLabelStyle: {
                     marginBottom: 3
                 },
                 tabBarButton: (props) => <TouchableOpacity {...props}/>
             })}
         >
-            <Tab.Screen
-                name="OverviewScreen"
-                component={OverviewScreen}
-                options={{
-                    title: 'Overview',
-                    tabBarIcon: ({color}) => <FontAwesomeIcon icon={faHouse} color={color}/>
+            <Tab.Group
+                screenOptions={{
+                    headerStyle: {
+                        backgroundColor: '#b2c7eb',
+                    },
                 }}
-            />
+            >
+                <Tab.Screen
+                    name="OverviewScreen"
+                    component={OverviewScreen}
+                    options={{
+                        title: 'Overview',
+                        tabBarIcon: ({color}) => <FontAwesomeIcon icon={faHouse} color={color}/>
+                    }}
+                />
+            </Tab.Group>
+
         </Tab.Navigator>
     );
 }
