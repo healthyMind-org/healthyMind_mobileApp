@@ -20,7 +20,7 @@ import {faBed} from "@fortawesome/free-solid-svg-icons/faBed";
 
 
 export default function StatusModal(navProps: RootStackScreenProps<"StatusModal">) {
-    let statusModalProps = navProps.route.params;
+
     let mentalState = MentalState.getInstance();
 
     const [emotionalData, setEmotionalData] = useState(new EmotionData(0, 0, 0, 0, 0, 0, 0, 0, 0));
@@ -28,20 +28,62 @@ export default function StatusModal(navProps: RootStackScreenProps<"StatusModal"
     const [exposureData, setExposureData] = useState(new ExposureData(0, 0))
 
     useEffect(() => {
+        let averageEmotion: EmotionData = new EmotionData(0, 0, 0, 0, 0, 0, 0, 0, 0);
+        let emotionDataCount = 0;
+        let averageExposure: ExposureData = new ExposureData(0, 0);
+        let exposureDataCount = 0;
+        let averageSleep: SleepData = new SleepData(new Date(), new Date(), 0);
+        let sleepDataCount = 0;
+
         for (let i = 0; i < mentalState.days.length; i++) {
             let day = mentalState.days[i];
-
-            if (day.date.toISOString() === statusModalProps.date.toISOString()) {
-                if (day.emotionData != null) {
-                    setEmotionalData(day.emotionData as EmotionData);
-                }
-                if (day.sleepData != null) {
-                    setSleepData(day.sleepData as SleepData);
-                }
-                if (day.exposureData != null) {
-                    setExposureData(day.exposureData as ExposureData)
-                }
+            if (day.emotionData != null) {
+                console.log("DepressionLevel original:", day.emotionData.depressionLevel);
+                averageEmotion.anxietyLevel += +day.emotionData.anxietyLevel;
+                averageEmotion.angerLevel += +day.emotionData.angerLevel;
+                averageEmotion.happinessLevel += +day.emotionData.happinessLevel;
+                averageEmotion.fearLevel += +day.emotionData.fearLevel;
+                averageEmotion.distressLevel += +day.emotionData.distressLevel;
+                averageEmotion.disgustLevel += +day.emotionData.disgustLevel;
+                averageEmotion.calmnessLevel += +day.emotionData.calmnessLevel;
+                averageEmotion.overwhelmLevel += +day.emotionData.overwhelmLevel;
+                averageEmotion.depressionLevel += +day.emotionData.depressionLevel;
+                emotionDataCount++;
             }
+            if (day.exposureData != null) {
+                averageExposure.disasterLevel += +day.exposureData.disasterLevel;
+                averageExposure.pollutionLevel += +day.exposureData.pollutionLevel;
+                exposureDataCount++;
+            }
+            if (day.sleepData != null) {
+                averageSleep.quality += +day.sleepData.quality;
+                sleepDataCount++;
+            }
+
+            console.log("DepressionLevel", averageEmotion.depressionLevel);
+            if (emotionDataCount > 0) {
+                averageEmotion.anxietyLevel /= emotionDataCount;
+                averageEmotion.angerLevel /= emotionDataCount;
+                averageEmotion.happinessLevel /= emotionDataCount;
+                averageEmotion.fearLevel /= emotionDataCount;
+                averageEmotion.distressLevel /= emotionDataCount;
+                averageEmotion.disgustLevel /= emotionDataCount;
+                averageEmotion.calmnessLevel /= emotionDataCount;
+                averageEmotion.overwhelmLevel /= emotionDataCount;
+                averageEmotion.depressionLevel /= emotionDataCount;
+            }
+
+            if (exposureDataCount > 0) {
+                averageExposure.disasterLevel /= exposureDataCount;
+                averageExposure.pollutionLevel /= exposureDataCount;
+            }
+
+            if (sleepDataCount > 0) {
+                averageSleep.quality /= sleepDataCount;
+            }
+            setEmotionalData(averageEmotion);
+            setExposureData(averageExposure);
+            setSleepData(averageSleep);
         }
     }, []);
 
@@ -132,20 +174,6 @@ export default function StatusModal(navProps: RootStackScreenProps<"StatusModal"
                         </View>
 
                     </View>
-                    <View style={styles.innerContainer}>
-
-                        {/*<View style={styles.innerInnerContainer}>*/}
-                        {/*    <FontAwesomeIcon*/}
-                        {/*        //distressed*/}
-                        {/*        icon={faFaceMehBlank}*/}
-                        {/*        size={45}*/}
-                        {/*        style={styles.icons}*/}
-                        {/*    />*/}
-
-                        {/*    <Text style={styles.text}>distress: {emotionalData.distressLevel} %</Text>*/}
-                        {/*</View>*/}
-
-                    </View>
 
                     <Text style={styles.title}> Exposure </Text>
                     <View style={styles.innerContainer}>
@@ -173,17 +201,16 @@ export default function StatusModal(navProps: RootStackScreenProps<"StatusModal"
                     <Text style={styles.title}> Sleep </Text>
                     <View style={styles.innerContainer}>
                         <View style={styles.innerInnerContainer}>
-                        <FontAwesomeIcon
-                            //sleep
-                            icon={faBed}
-                            size={45}
-                            style={styles.icons}
-                        />
-                        <Text style={styles.text}>Sleep:</Text>
-                        <Text style={styles.text}>{sleepData.quality * 20} %</Text>
+                            <FontAwesomeIcon
+                                //sleep
+                                icon={faBed}
+                                size={45}
+                                style={styles.icons}
+                            />
+                            <Text style={styles.text}>Sleep:</Text>
+                            <Text style={styles.text}>{sleepData.quality * 20} %</Text>
                         </View>
                     </View>
-
 
 
                 </View>

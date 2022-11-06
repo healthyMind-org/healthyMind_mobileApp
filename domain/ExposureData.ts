@@ -1,6 +1,6 @@
 export class ExposureData {
-    readonly pollutionLevel: number;
-    readonly disasterLevel: number;
+    public pollutionLevel: number;
+    public disasterLevel: number;
 
     constructor(pollutionLevel: number, disasterLevel: number) {
         this.pollutionLevel = pollutionLevel;

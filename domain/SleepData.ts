@@ -1,7 +1,7 @@
 export class SleepData {
     readonly bedTime: Date;
     readonly wakeUpTime: Date;
-    readonly quality: number;
+    public quality: number;
 
 
     constructor(bedTime: Date, wakeUpTime: Date, quality: number) {
